@@ -2,52 +2,40 @@
   <div class="container">
     <van-sticky :offset-top="0" >
       <div style="background: white" >
-        <div style="background: #9af5c6;margin: 10px">
-         已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
-        <div style="background: #9af5c6;margin: 10px">
-          已点菜单
-        </div>
+        <van-row  v-for="order in sortedOrders" :key="order.key" style="margin-bottom: 10px">
+          <van-row>
+            <span style="font-weight: bold;color:#f89705;word-break: break-word;" >{{order.data.categoryName}}</span>
+          </van-row>
+          <van-row  v-for="(goods, index) in order.data.goodsList" key="goods.code" class="goods-row"  >
+
+            <van-col span="4" >
+              {{goods.code}}
+            </van-col>
+            <van-col span="5">
+              {{goods.price/100.0}}
+            </van-col>
+
+            <van-col span="8">
+              <van-stepper min="1" v-model="goods.cnt">
+              </van-stepper>
+            </van-col>
+
+
+            <van-col span="6">
+              {{goods.cnt*goods.price/100.0}}
+            </van-col>
+            <van-col span="1">
+              <van-button size="mini" icon="delete" color="red"  @click="deleteGood(order.key, index)"></van-button>
+            </van-col>
+          </van-row>
+        </van-row>
+        <van-row class="goods-row">
+          <van-col span="8">总计:{{total}}</van-col>
+          <van-col span="10"> <van-field v-model="tableNumber" label="桌号" placeholder="请输入桌号" /></van-col>
+          <van-col span="6"><van-button>Submit</van-button></van-col>
+        </van-row>
       </div>
+
     </van-sticky>
     <van-grid :column-num="2" :gutter="10">
         <van-grid-item
@@ -79,7 +67,6 @@
         </van-grid-item>
       </van-grid>
 
-
     <van-dialog v-model:show="showDialog" title="Confirm" show-cancel-button
                 :before-close="clearGoods"
                 @confirm="addGoods"
@@ -95,6 +82,8 @@
         position="bottom"
         :style="{ height: '80%' }"
         z-index="1000"
+        @close="clearCategory"
+        closeable
     >
       <van-grid :column-num="2" :gutter="10">
         <van-grid-item
@@ -130,7 +119,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted,computed } from 'vue'
 import menuJson from '../assets/menu.json'
 
 // 显示底部栏按钮、显示对话框
@@ -148,11 +137,12 @@ const currentGoods = ref({})
 
 
 // 已点菜单数据
-const orderedData = ref([])
+const orderedData = ref({})
+const tableNumber = ref(0)
 
 onMounted(() => {
   menuData.value = menuJson
-  orderedData.value = []
+  orderedData.value = {}
 })
 
 const clearGoods = () => {
@@ -211,10 +201,10 @@ const addGoods = () => {
         findGoods = true;
         break;
       }
-      if(findGoods === false) {
-        item.cnt = chooseCnt.value;
-        existCategory.goodsList.push(item)
-      }
+    }
+    if(findGoods === false) {
+      item.cnt = chooseCnt.value;
+      existCategory.goodsList.push(item)
     }
   }else {
     orderedData.value[currentCategoryId] = {}
@@ -223,11 +213,46 @@ const addGoods = () => {
     item.cnt = 1;
     orderedData.value[currentCategoryId].goodsList.push(item)
   }
-
   console.info(orderedData.value)
-  clearAllChoose();
 
 }
+
+
+// 按订单key排序的订单数组
+const sortedOrders = computed(() => {
+  return Object.keys(orderedData.value)
+      .sort((a, b) => a - b) // 数字排序
+      .map(key => ({
+        key: Number(key),
+        data: orderedData.value[key]
+      }));
+});
+
+const total = computed(() => {
+  let sum = 0;
+  for (const categoryId in orderedData.value) {
+    const category = orderedData.value[categoryId];
+
+    // 第二层循环：遍历分类下的商品列表
+    for (const goods of category.goodsList) {
+      sum += goods.cnt * goods.price; // 直接累加分单位的总值
+    }
+  }
+
+  return sum/100.0;
+})
+
+// 删除商品方法
+const deleteGood = (orderKey, index) => {
+  showConfirmDialog({
+    title: '确认删除',
+    message: '确定要删除该商品吗？',
+  }).then(() => {
+    orderedData[orderKey].goodsList.splice(index, 1);
+  }).catch(() => {
+    // 取消操作
+  });
+};
 </script>
 <style>
 .container {
@@ -318,5 +343,14 @@ const addGoods = () => {
    transform: scale(0.98);
    background: #9af5c6 !important;
  }
+}
+
+
+
+.goods-row {
+  display: flex;
+  align-items: center;  /* 商品行垂直居中 */
+  margin-bottom: 8px;
+  width: 100%;
 }
 </style>
