@@ -1,0 +1,74 @@
+[
+    {
+      "id": 1,
+      "name": "饮料",
+      "icon": "drink.png",
+      "menuList": [
+        {
+          "parentId": 1,
+          "id": 1,
+          "code": "M1",
+          "name": "可乐",
+          "price": 1251
+        },
+        {
+          "parentId": 2,
+          "code": "M2",
+          "id": 2,
+          "name": "雪碧",
+          "price": 1321
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "分类2",
+      "icon": "",
+      "menuList": [
+        {
+          "parentId": 2,
+          "id": 1,
+          "code": "M3",
+          "name": "糖醋排骨",
+          "price": 5123
+        },
+        {
+          "parentId": 2,
+          "id": 2,
+          "code": "M4",
+          "name": "红烧排骨",
+          "price": 6123
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "分类3",
+      "icon": "",
+      "menuList": [
+        {
+          "parentId": 3,
+          "id": 1,
+          "code": "M5",
+          "name": "爆炒葱花",
+          "price": 4251
+        },
+        {
+          "parentId": 3,
+          "id": 2,
+          "code": "M6",
+          "name": "古法里脊",
+          "price": 6121
+        },
+        {
+          "parentId": 3,
+          "id": 3,
+          "code": "M7",
+          "name": "清蒸鲈鱼",
+          "price": 16121
+        }
+      ]
+    }
+
+]
+
