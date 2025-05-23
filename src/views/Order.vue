@@ -25,14 +25,14 @@
               {{goods.cnt*goods.price/100.0}}
             </van-col>
             <van-col span="1">
-              <van-button size="mini" icon="delete" color="red"  @click="deleteGood(order.key, index)"></van-button>
+              <van-button size="mini" icon="delete" color="red"  @click="deleteGood(order.key, goods.code)"></van-button>
             </van-col>
           </van-row>
         </van-row>
         <van-row class="goods-row">
           <van-col span="8">总计:{{total}}</van-col>
           <van-col span="10"> <van-field v-model="tableNumber" label="桌号" placeholder="请输入桌号" /></van-col>
-          <van-col span="6"><van-button>Submit</van-button></van-col>
+          <van-col span="6"><van-button @click="onSubmit">Submit</van-button></van-col>
         </van-row>
       </div>
 
@@ -120,6 +120,7 @@
 
 <script setup>
 import { ref, onMounted,computed } from 'vue'
+import {showConfirmDialog} from 'vant'
 import menuJson from '../assets/menu.json'
 
 // 显示底部栏按钮、显示对话框
@@ -213,8 +214,6 @@ const addGoods = () => {
     item.cnt = 1;
     orderedData.value[currentCategoryId].goodsList.push(item)
   }
-  console.info(orderedData.value)
-
 }
 
 
@@ -243,16 +242,35 @@ const total = computed(() => {
 })
 
 // 删除商品方法
-const deleteGood = (orderKey, index) => {
+const deleteGood = (orderKey, code) => {
   showConfirmDialog({
     title: '确认删除',
     message: '确定要删除该商品吗？',
   }).then(() => {
-    orderedData[orderKey].goodsList.splice(index, 1);
+    // 遍历key
+    for (const categoryId in orderedData.value) {
+      if(categoryId != orderKey) {
+        continue
+      }
+      const category = orderedData.value[categoryId];
+
+      category.goodsList = category.goodsList.filter(goods => goods.code !== code);
+    }
   }).catch(() => {
     // 取消操作
   });
 };
+
+const onSubmit = () => {
+  // showConfirmDialog({
+  //   title: '确认删除',
+  //   message: '确定要删除该商品吗？',
+  // }).then(() => {
+  //   orderedData[orderKey].goodsList.splice(index, 1);
+  // }).catch(() => {
+  //   // 取消操作
+  // });
+}
 </script>
 <style>
 .container {
