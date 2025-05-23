@@ -1,20 +1,20 @@
 [
     {
       "id": 1,
-      "name": "饮料",
+      "name": "饮料1111111111111111111111111111111111111111111111111111111111111112222222222222222",
       "icon": "drink.png",
       "menuList": [
         {
-          "parentId": 1,
-          "id": 1,
+          "parentName": "饮料",
+          "icon": "drink.png",
           "code": "M1",
           "name": "可乐",
           "price": 1251
         },
         {
-          "parentId": 2,
           "code": "M2",
-          "id": 2,
+          "parentName": "饮料",
+          "icon": "",
           "name": "雪碧",
           "price": 1321
         }
@@ -22,53 +22,66 @@
     },
     {
       "id": 2,
-      "name": "分类2",
-      "icon": "",
+      "name": "Gebratene Nudeln mit Schweinefleisch (hausgemacht)",
+      "icon": "drink.png",
       "menuList": [
         {
-          "parentId": 2,
-          "id": 1,
-          "code": "M3",
-          "name": "糖醋排骨",
-          "price": 5123
+          "parentName": "酒精饮料",
+          "icon": "drink.png",
+          "code": "M1",
+          "name": "可乐",
+          "price": 1251
         },
         {
-          "parentId": 2,
-          "id": 2,
-          "code": "M4",
-          "name": "红烧排骨",
-          "price": 6123
+          "code": "M2",
+          "parentName": "酒精饮料",
+          "icon": "",
+          "name": "雪碧",
+          "price": 1321
         }
       ]
     },
-    {
-      "id": 3,
-      "name": "分类3",
-      "icon": "",
-      "menuList": [
-        {
-          "parentId": 3,
-          "id": 1,
-          "code": "M5",
-          "name": "爆炒葱花",
-          "price": 4251
-        },
-        {
-          "parentId": 3,
-          "id": 2,
-          "code": "M6",
-          "name": "古法里脊",
-          "price": 6121
-        },
-        {
-          "parentId": 3,
-          "id": 3,
-          "code": "M7",
-          "name": "清蒸鲈鱼",
-          "price": 16121
-        }
-      ]
-    }
-
+  {
+    "id": 3,
+    "name": "饮料223311111 234234",
+    "icon": "drink.png",
+    "menuList": [
+      {
+        "parentName": "饮料",
+        "icon": "drink.png",
+        "code": "M1",
+        "name": "可乐",
+        "price": 1251
+      },
+      {
+        "code": "M2",
+        "parentName": "饮料",
+        "icon": "",
+        "name": "雪碧",
+        "price": 1321
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "分类5",
+    "icon": "drink.png",
+    "menuList": [
+      {
+        "parentName": "饮料",
+        "icon": "drink.png",
+        "code": "M1",
+        "name": "可乐",
+        "price": 1251
+      },
+      {
+        "code": "M2",
+        "parentName": "饮料",
+        "icon": "",
+        "name": "雪碧",
+        "price": 1321
+      }
+    ]
+  }
 ]
 

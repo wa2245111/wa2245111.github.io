@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <van-sticky :offset-top="0">
+      <div style="background: #9af5c6">
+       已点菜单
+      </div>
+    </van-sticky>
     <van-grid :column-num="2" :gutter="10">
       <van-grid-item
           v-for="category in menuData"
@@ -12,7 +17,6 @@
             <van-image
                 :src="getImageUrl(category.icon)"
                 class="category-image"
-                @error="() => handleImageError(category.id)"
             >
               <template #error>
                 <div class="image-placeholder">
@@ -38,10 +42,12 @@ import { ref, onMounted } from 'vue'
 import menuJson from '../assets/menu.json'
 
 const menuData = ref([])
-const imageStates = ref({})
+// 已点菜单数据
+const orderedData = ref([])
 
 onMounted(() => {
   menuData.value = menuJson
+  orderedData.value = []
 })
 
 const getImageUrl = (name) => {
@@ -52,16 +58,12 @@ const getImageUrl = (name) => {
   }
 }
 
-const handleImageError = (id) => {
-  imageStates.value[id] = false
-}
 
 const handleCategoryClick = (menuList) => {
   console.log('Clicked menu:', menuList)
 }
 </script>
-
-<style scoped>
+<style>
 .container {
   padding: 12px;
 }
@@ -93,7 +95,12 @@ const handleCategoryClick = (menuList) => {
   justify-content: center;
   align-items: center;
 }
-
+/* 保持网格项宽度固定 */
+.van-grid-item {
+  flex-basis: 50% !important;
+  max-width: 50% !important;
+  min-width: 0 !important; /* 重要：防止内容撑开 */
+}
 /* 图片样式 */
 .category-image {
   width: 80px;
@@ -127,7 +134,15 @@ const handleCategoryClick = (menuList) => {
   font-weight: 500;
   color: #333;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1;
+  width: 100%;
+
+  /* 新增换行控制 */
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 最多显示10行 */
+  -webkit-box-orient: vertical;
+  word-break: break-word; /* 允许单词断开 */
+  overflow: visible;
 }
 
 /* 点击效果 */
@@ -135,7 +150,7 @@ const handleCategoryClick = (menuList) => {
   transition: transform 0.2s;
 &:active {
    transform: scale(0.98);
-   background: #9af5c6;
+   background: #9af5c6 !important;
  }
 }
 </style>
