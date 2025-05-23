@@ -1,19 +1,17 @@
 [
     {
-      "id": 1,
+      "id":1,
       "name": "饮料1111111111111111111111111111111111111111111111111111111111111112222222222222222",
-      "icon": "drink.png",
-      "menuList": [
+      "icon": "",
+      "goodsList": [
         {
-          "parentName": "饮料",
-          "icon": "drink.png",
+          "icon": "",
           "code": "M1",
           "name": "可乐",
           "price": 1251
         },
         {
           "code": "M2",
-          "parentName": "饮料",
           "icon": "",
           "name": "雪碧",
           "price": 1321
@@ -21,20 +19,18 @@
       ]
     },
     {
-      "id": 2,
+      "id":2,
       "name": "Gebratene Nudeln mit Schweinefleisch (hausgemacht)",
       "icon": "drink.png",
-      "menuList": [
+      "goodsList": [
         {
-          "parentName": "酒精饮料",
           "icon": "drink.png",
-          "code": "M1",
+          "code": "M3",
           "name": "可乐",
           "price": 1251
         },
         {
-          "code": "M2",
-          "parentName": "酒精饮料",
+          "code": "M4",
           "icon": "",
           "name": "雪碧",
           "price": 1321
@@ -42,20 +38,18 @@
       ]
     },
   {
-    "id": 3,
+    "id":3,
     "name": "饮料223311111 234234",
     "icon": "drink.png",
-    "menuList": [
+    "goodsList": [
       {
-        "parentName": "饮料",
         "icon": "drink.png",
-        "code": "M1",
+        "code": "M5",
         "name": "可乐",
         "price": 1251
       },
       {
-        "code": "M2",
-        "parentName": "饮料",
+        "code": "M6",
         "icon": "",
         "name": "雪碧",
         "price": 1321
@@ -63,20 +57,18 @@
     ]
   },
   {
-    "id": 4,
+    "id":4,
     "name": "分类5",
     "icon": "drink.png",
-    "menuList": [
+    "goodsList": [
       {
-        "parentName": "饮料",
         "icon": "drink.png",
-        "code": "M1",
+        "code": "M7",
         "name": "可乐",
         "price": 1251
       },
       {
-        "code": "M2",
-        "parentName": "饮料",
+        "code": "M8",
         "icon": "",
         "name": "雪碧",
         "price": 1321

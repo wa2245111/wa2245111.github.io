@@ -1,39 +1,131 @@
 <template>
   <div class="container">
-    <van-sticky :offset-top="0">
-      <div style="background: #9af5c6">
-       已点菜单
+    <van-sticky :offset-top="0" >
+      <div style="background: white" >
+        <div style="background: #9af5c6;margin: 10px">
+         已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
+        <div style="background: #9af5c6;margin: 10px">
+          已点菜单
+        </div>
       </div>
     </van-sticky>
     <van-grid :column-num="2" :gutter="10">
-      <van-grid-item
-          v-for="category in menuData"
-          :key="category.id"
-          class="category-item"
-          @click="handleCategoryClick(category.menuList)"
-      >
-        <div class="content-wrapper">
-          <div class="image-container">
-            <van-image
-                :src="getImageUrl(category.icon)"
-                class="category-image"
-            >
-              <template #error>
-                <div class="image-placeholder">
-                  <van-icon name="photo-fail" size="24" />
-                </div>
-              </template>
-              <template #loading>
-                <van-loading type="spinner" size="20" />
-              </template>
-            </van-image>
+        <van-grid-item
+            v-for="category in menuData"
+            :key="category.id"
+            class="category-item"
+            @click="handleCategoryClick(category)"
+        >
+          <div class="content-wrapper">
+            <div class="image-container">
+              <van-image
+                  :src="getImageUrl(category.icon)"
+                  class="category-image"
+              >
+                <template #error>
+                  <div class="image-placeholder">
+                    <van-icon name="photo-fail" size="24" />
+                  </div>
+                </template>
+                <template #loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+            </div>
+            <div class="category-name">
+              {{ category.name }}
+            </div>
           </div>
-          <div class="category-name">
-            {{ category.name }}
+        </van-grid-item>
+      </van-grid>
+
+
+    <van-dialog v-model:show="showDialog" title="Confirm" show-cancel-button
+                :before-close="clearGoods"
+                @confirm="addGoods"
+                @cancel="clearGoods"
+                >
+      <div style="width: 100%;display: flex;justify-content: space-around">
+        <van-stepper v-model.number="chooseCnt" integer input-width="100px" button-size="50px"   />
+      </div>
+    </van-dialog>
+    <!-- 底部弹出 -->
+    <van-popup
+        v-model:show="showBottom"
+        position="bottom"
+        :style="{ height: '80%' }"
+        z-index="1000"
+    >
+      <van-grid :column-num="2" :gutter="10">
+        <van-grid-item
+            v-for="goods in currentCategory.goodsList"
+            :key="goods.code"
+            @click="handleGoodsClick(goods)"
+            class="category-item"
+        >
+          <div class="content-wrapper">
+            <div class="image-container">
+              <van-image
+                  :src="getImageUrl(goods.icon)"
+                  class="category-image"
+              >
+                <template #error>
+                  <div class="image-placeholder">
+                    <van-icon name="photo-fail" size="24" />
+                  </div>
+                </template>
+                <template #loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+            </div>
+            <div class="category-name">
+              {{ goods.name }}
+            </div>
           </div>
-        </div>
-      </van-grid-item>
-    </van-grid>
+        </van-grid-item>
+      </van-grid>
+    </van-popup>
   </div>
 </template>
 
@@ -41,7 +133,20 @@
 import { ref, onMounted } from 'vue'
 import menuJson from '../assets/menu.json'
 
+// 显示底部栏按钮、显示对话框
+const showBottom = ref(false)
+const showDialog = ref(false)
+const chooseCnt = ref(1)
+
+// 菜单数据
 const menuData = ref([])
+
+// 当前选中分类数据
+const currentCategory= ref({})
+// 当前选中产品数据
+const currentGoods = ref({})
+
+
 // 已点菜单数据
 const orderedData = ref([])
 
@@ -49,6 +154,24 @@ onMounted(() => {
   menuData.value = menuJson
   orderedData.value = []
 })
+
+const clearGoods = () => {
+  currentGoods.value = {}
+  showDialog.value = false;
+  chooseCnt.value = 1
+}
+
+const clearCategory = () => {
+  currentCategory.value = {};
+  showBottom.value = false;
+}
+
+// 清除选中的所有数据
+const clearAllChoose = () => {
+  clearGoods();
+  clearCategory();
+}
+
 
 const getImageUrl = (name) => {
   try {
@@ -59,8 +182,51 @@ const getImageUrl = (name) => {
 }
 
 
-const handleCategoryClick = (menuList) => {
-  console.log('Clicked menu:', menuList)
+const handleCategoryClick = (category) => {
+  currentCategory.value = category
+  showBottom.value = true
+}
+
+const handleGoodsClick = (goods) => {
+  currentGoods.value = goods;
+  showDialog.value = true;
+}
+
+
+const addGoods = () => {
+  const goods = currentGoods.value
+  let item = {
+    ...goods
+  }
+  const currentCategoryName = currentCategory.value.name;
+  const currentCategoryId = currentCategory.value.id;
+
+  if(Object.hasOwn(orderedData.value, currentCategoryId)) {
+    const existCategory = orderedData.value[currentCategoryId];
+    let findGoods = false;
+    for(const existGoodsItem of existCategory.goodsList) {
+      // code相同代表菜品相同
+      if(existGoodsItem.code === item.code) {
+        existGoodsItem.cnt = existGoodsItem.cnt + chooseCnt.value;
+        findGoods = true;
+        break;
+      }
+      if(findGoods === false) {
+        item.cnt = chooseCnt.value;
+        existCategory.goodsList.push(item)
+      }
+    }
+  }else {
+    orderedData.value[currentCategoryId] = {}
+    orderedData.value[currentCategoryId].categoryName = currentCategoryName
+    orderedData.value[currentCategoryId].goodsList = []
+    item.cnt = 1;
+    orderedData.value[currentCategoryId].goodsList.push(item)
+  }
+
+  console.info(orderedData.value)
+  clearAllChoose();
+
 }
 </script>
 <style>
