@@ -21,23 +21,16 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'My Offline App',
-        short_name: 'OfflineApp',
-        start_url: '.',
+        name: 'My App',
+        short_name: 'App',
+        start_url: '/',
         display: 'standalone',
-        background_color: '#ffffff',
         icons: [
-          {
-            src: '/icon-192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: '/icon-512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
+          { src: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
+        ],
+        background_color: '#FFFFFF',
+        theme_color: '#41B883'
       }
     })
   ]
