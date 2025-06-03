@@ -1,79 +1,76 @@
 [
-    {
-      "id":1,
-      "name": "饮料1111111111111111111111111111111111111111111111111111111111111112222222222222222",
-      "icon": "",
-      "goodsList": [
-        {
-          "icon": "",
-          "code": "M1",
-          "name": "可乐",
-          "price": 1345123
-        },
-        {
-          "code": "M2",
-          "icon": "",
-          "name": "雪碧",
-          "price": 1345123
-        }
-      ]
-    },
-    {
-      "id":2,
-      "name": "Gebratene Nudeln mit Schweinefleisch (hausgemacht)",
-      "icon": "drink.png",
-      "goodsList": [
-        {
-          "icon": "drink.png",
-          "code": "M3",
-          "name": "可乐",
-          "price": 1345123
-        },
-        {
-          "code": "M4",
-          "icon": "",
-          "name": "雪碧",
-          "price": 1345123
-        }
-      ]
-    },
   {
-    "id":3,
-    "name": "饮料223311111 234234",
+    "id":1,
+    "name": "分类1",
     "icon": "drink.png",
     "goodsList": [
       {
         "icon": "drink.png",
-        "code": "M5",
+        "code": "M1",
         "name": "可乐",
-        "price": 1345123
+        "price": 1345121
       },
       {
-        "code": "M6",
-        "icon": "",
+        "code": "M2",
+        "icon": "drink.png",
         "name": "雪碧",
+        "price": 1345122
+      },
+      {
+        "code": "M3",
+        "icon": "drink.png",
+        "name": "冰红茶",
         "price": 1345123
       }
     ]
   },
   {
-    "id":4,
-    "name": "分类5",
+    "id":2,
+    "name": "分类2",
     "icon": "drink.png",
     "goodsList": [
       {
         "icon": "drink.png",
+        "code": "M4",
+        "name": "葱爆羊肉",
+        "price": 1345123
+      },
+      {
+        "code": "M5",
+        "icon": "drink.png",
+        "name": "可乐鸡翅",
+        "price": 1345123
+      },
+      {
+        "code": "M6",
+        "icon": "drink.png",
+        "name": "霸王别姬",
+        "price": 1345123
+      },
+      {
         "code": "M7",
-        "name": "可乐",
+        "icon": "drink.png",
+        "name": "蒜香鸡腿",
         "price": 1345123
       },
       {
         "code": "M8",
-        "icon": "",
-        "name": "雪碧",
+        "icon": "drink.png",
+        "name": "薯条",
+        "price": 1345123
+      },
+      {
+        "code": "M9",
+        "icon": "drink.png",
+        "name": "薯片",
+        "price": 1345123
+      },
+      {
+        "code": "M10",
+        "icon": "drink.png",
+        "name": "土豆牛腩",
         "price": 1345123
       }
     ]
   }
 ]
-

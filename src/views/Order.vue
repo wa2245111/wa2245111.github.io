@@ -111,6 +111,9 @@
             <div class="category-name">
               {{ goods.name }}
             </div>
+            <div class="category-name">
+              {{ goods.code }}
+            </div>
           </div>
         </van-grid-item>
       </van-grid>
