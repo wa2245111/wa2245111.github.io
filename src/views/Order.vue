@@ -83,7 +83,6 @@
         :style="{ height: '80%' }"
         z-index="1000"
         @close="clearCategory"
-        closeable
     >
       <van-grid :column-num="2" :gutter="10">
         <van-grid-item
