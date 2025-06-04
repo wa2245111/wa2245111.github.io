@@ -25,9 +25,9 @@
                   size="small"
                   icon="plus"
                   class="action-btn add"
-                  @click="go2Add(item)"
+                  @click="go2Modify(item)"
               >
-                加菜
+                修改
               </van-button>
               <van-button
                   type="info"
@@ -53,19 +53,61 @@
       </van-list>
     </van-pull-refresh>
 
+    <van-popup
+        v-model:show="showDetail"
+        position="bottom"
+        :style="{ height: '100%' }"
+        z-index="1000"
+        closeable
+        @close="clearDetail"
+    >
+      <div class="popup-content">
+          <div style="background: white; padding: 16px">
+            <!-- 标题 -->
+            <h1 style="text-align: center; margin-bottom: 20px">{{tableNumberStr}}</h1>
+
+            <!-- 分类列表 -->
+            <div v-for="order in sortedOrders" :key="order.key" class="order-item">
+              <!-- 分类标题 -->
+              <div class="category-title">
+                <span>{{order.data.categoryName}}</span>
+              </div>
+
+              <!-- 商品列表 -->
+              <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" class="goods-row">
+                <van-col span="6" class="goods-code">{{goods.code}}</van-col>
+                <van-col span="6" class="goods-price">{{format.formatGermanyMoney(goods.price)}}</van-col>
+                <van-col span="6" class="goods-quantity">{{goods.cnt}}</van-col>
+                <van-col span="6" class="goods-total">{{format.formatGermanyMoney(goods.cnt*goods.price)}}</van-col>
+              </div>
+            </div>
+
+            <!-- 固定底部：总计 -->
+            <div class="total-footer">
+              <div class="total-container">
+                <span class="total-label">总计：</span>
+                <span class="total-value">{{total}}</span>
+              </div>
+            </div>
+          </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
-import storage from "../utils/storage";
+import {computed, ref} from "vue";
 import {showConfirmDialog, showSuccessToast} from "vant";
+import storage from "../utils/storage";
+import format from "../utils/format";
 
 const list = ref([]);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
-
+const showDetail = ref(false);
+const orderedData = ref({});
+const tableNumberStr = ref(undefined)
 
 const getNumber = (str) => {
   const num = parseInt(str.substring(6), 10);
@@ -101,6 +143,22 @@ const onRefresh = () => {
 };
 
 
+const total = computed(() => {
+  let sum = 0;
+  for (const categoryId in orderedData.value) {
+    const category = orderedData.value[categoryId];
+
+    // 第二层循环：遍历分类下的商品列表
+    for (const goods of category.goodsList) {
+      sum += goods.cnt * goods.price; // 直接累加分单位的总值
+    }
+  }
+
+  return format.formatGermanyMoney(sum)
+})
+
+
+
 const confirmDelete = (item) => {
   showConfirmDialog({
     title: '删除确认',
@@ -119,13 +177,34 @@ const confirmDelete = (item) => {
   })
 }
 
-const go2Add = (item) => {
+
+// 按订单key排序的订单数组
+const sortedOrders = computed(() => {
+  return Object.keys(orderedData.value)
+      .sort((a, b) => a - b) // 数字排序
+      .map(key => ({
+        key: Number(key),
+        data: orderedData.value[key]
+      }));
+});
+
+const go2Modify = (item) => {
   showSuccessToast("正在完善")
 }
 
 const handleDetail = (item) => {
-  showSuccessToast("正在完善")
+  tableNumberStr.value = item.name;
+  orderedData.value = storage.get(item.key)
+  showDetail.value = true;
+
 }
+
+const clearDetail = () => {
+  tableNumberStr.value = undefined;
+  orderedData.value = {};
+  showDetail.value = false;
+}
+
 </script>
 
 <style scoped>
@@ -279,5 +358,92 @@ const handleDetail = (item) => {
 
 .list-item {
   animation: fadeIn 0.4s ease-out;
+}
+
+/* 分类标题样式 */
+.category-title {
+  background-color: #f89705;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 12px 0 8px;
+  font-weight: bold;
+}
+
+/* 商品行样式 */
+.goods-row {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+/* 商品信息样式 */
+.goods-code, .goods-price, .goods-quantity, .goods-total {
+  text-align: center;
+  font-size: 14px;
+}
+
+.goods-price, .goods-total {
+  color: #ee0a24; /* 价格红色突出 */
+  font-weight: 500;
+}
+
+/* 总计行样式 */
+.total-row {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 2px solid #f89705;
+}
+
+.total-text {
+  text-align: right;
+  font-size: 16px;
+  padding-right: 16px;
+}
+
+.total-amount {
+  font-weight: bold;
+  font-size: 18px;
+  color: #ee0a24;
+}
+
+/* 订单项间距 */
+.order-item {
+  margin-bottom: 20px;
+}
+
+.popup-content {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* 底部总计样式 */
+.total-footer {
+  border-top: 2px solid #f89705;
+  background: white;
+  padding: 12px 16px;
+  position: sticky;
+  bottom: 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.total-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.total-label {
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.total-value {
+  font-weight: bold;
+  font-size: 18px;
+  color: #ee0a24;
 }
 </style>

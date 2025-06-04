@@ -122,6 +122,9 @@
             <div class="category-name">
               {{ goods.code }}
             </div>
+            <div class="category-name">
+              {{format.formatGermanyMoney(goods.price)}}
+            </div>
           </div>
         </van-grid-item>
       </van-grid>
@@ -315,6 +318,7 @@ const onSubmit = () => {
     storage.set('table_'+tableNumber.value, orderedData.value)
     // 清空数据
     clearAllChoose();
+    inputTableNumber.value = undefined;
     orderedData.value = {};
     tableNumber.value = undefined;
     showSuccessToast('提交成功');
