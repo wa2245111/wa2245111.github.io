@@ -1,42 +1,31 @@
 <template>
   <div class="container">
-    <van-sticky :offset-top="0" >
-      <div style="background: white" >
-        <van-row  v-for="order in sortedOrders" :key="order.key" style="margin-bottom: 10px">
+    <div class="sticky-container">
+      <div class="sticky-header">
+        <!-- 这里放置你的 sticky 内容 -->
+        <van-row v-for="order in sortedOrders" :key="order.key" style="margin-bottom: 10px">
           <van-row>
             <span style="font-weight: bold;color:#f89705;word-break: break-word;" >{{order.data.categoryName}}</span>
           </van-row>
-          <van-row  v-for="(goods, index) in order.data.goodsList" key="goods.code" class="goods-row"  >
-
-            <van-col span="4" >
-              {{goods.code}}
-            </van-col>
-            <van-col span="5">
-              {{format.formatGermanyMoney(goods.price)}}
-            </van-col>
-
+          <van-row v-for="(goods, index) in order.data.goodsList" :key="goods.code" class="goods-row">
+            <van-col span="4">{{goods.code}}</van-col>
+            <van-col span="5"><span class="price">{{format.formatGermanyMoney(goods.price)}}</span></van-col>
             <van-col span="8">
-              <van-stepper min="1" v-model="goods.cnt">
-              </van-stepper>
+              <van-stepper :long-press="false" min="1" v-model="goods.cnt"/>
             </van-col>
-
-
-            <van-col span="6">
-              {{format.formatGermanyMoney(goods.cnt*goods.price)}}
-            </van-col>
+            <van-col span="6"><span class="price">{{format.formatGermanyMoney(goods.cnt*goods.price)}}</span></van-col>
             <van-col span="1">
-              <van-button size="mini" icon="delete" color="red"  @click="deleteGood(order.key, goods.code)"></van-button>
+              <van-button size="mini" icon="delete" color="red" @click="deleteGood(order.key, goods.code)"></van-button>
             </van-col>
           </van-row>
         </van-row>
         <van-row class="goods-row">
-          <van-col span="8" style="text-align: center">总计:<span style="font-weight: bold">{{total}}</span></van-col>
+          <van-col span="8" style="text-align: center">总计:<span class="price">{{total}}</span></van-col>
           <van-col span="8" style="text-align: center">桌号:<span style="color: #ed6a0c;font-weight: bold;">{{tableNumber}}</span></van-col>
-          <van-col span="8"  style="text-align: center"><van-button @click="onSubmit">提交</van-button></van-col>
+          <van-col span="8" style="text-align: center"><van-button @click="onSubmit">提交</van-button></van-col>
         </van-row>
       </div>
-
-    </van-sticky>
+    </div>
     <van-grid :column-num="2" :gutter="10">
         <van-grid-item
             v-for="category in menuData"
@@ -68,9 +57,7 @@
       </van-grid>
 
     <van-dialog v-model:show="showTableNumberDialog" title="输入桌号" show-cancel-button
-                @confirm="confirmTableNumber"
-
-    >
+                @confirm="confirmTableNumber">
       <div style="width: 100%;display: flex;justify-content: space-around">
         <van-field v-model="inputTableNumber" type="number" placeholder="请输入桌号"></van-field>
       </div>
@@ -82,7 +69,7 @@
                 @cancel="clearGoods"
                 >
       <div style="width: 100%;display: flex;justify-content: space-around">
-        <van-stepper v-model.number="chooseCnt" integer input-width="100px" button-size="50px"   />
+        <van-stepper :long-press="false" v-model.number="chooseCnt" integer input-width="100px" button-size="50px"   />
       </div>
     </van-dialog>
     <!-- 底部弹出 -->
@@ -123,7 +110,7 @@
               {{ goods.code }}
             </div>
             <div class="category-name">
-              {{format.formatGermanyMoney(goods.price)}}
+              <span class="price">{{format.formatGermanyMoney(goods.price)}}</span>
             </div>
           </div>
         </van-grid-item>
@@ -144,6 +131,7 @@ const showBottom = ref(false)
 const showDialog = ref(false)
 const chooseCnt = ref(1)
 const showTableNumberDialog = ref(false)
+
 
 // 菜单数据
 const menuData = ref([])
@@ -332,6 +320,31 @@ const onSubmit = () => {
   padding: 12px;
 }
 
+.sticky-container{
+  max-height: 400px; /* 设置最大高度 */
+  overflow-y: auto;
+  padding: 10px;
+  position: relative;
+}
+
+.sticky-header {
+  background: white;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.goods-row {
+  display: flex;
+  align-items: center;  /* 商品行垂直居中 */
+  margin-bottom: 8px;
+  width: 100%;
+}
+.goods-row:last-child {
+  margin-bottom: 0;
+}
+
 /* 网格项样式 */
 .category-item {
   padding: 0;
@@ -419,11 +432,9 @@ const onSubmit = () => {
 }
 
 
-
-.goods-row {
-  display: flex;
-  align-items: center;  /* 商品行垂直居中 */
-  margin-bottom: 8px;
-  width: 100%;
+.price {
+  color: orangered;
+  font-weight: bold;
 }
+
 </style>
