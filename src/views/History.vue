@@ -25,7 +25,7 @@
                   size="small"
                   icon="plus"
                   class="action-btn add"
-                  @click="handleAdd(item)"
+                  @click="go2Add(item)"
               >
                 加菜
               </van-button>
@@ -117,6 +117,14 @@ const confirmDelete = (item) => {
   .catch(() => {
     // 取消操作
   })
+}
+
+const go2Add = (item) => {
+  showSuccessToast("正在完善")
+}
+
+const handleDetail = (item) => {
+  showSuccessToast("正在完善")
 }
 </script>
 
