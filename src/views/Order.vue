@@ -12,7 +12,7 @@
               {{goods.code}}
             </van-col>
             <van-col span="5">
-              {{goods.price/100.0}}
+              {{format.formatGermanyMoney(goods.price)}}
             </van-col>
 
             <van-col span="8">
@@ -22,7 +22,7 @@
 
 
             <van-col span="6">
-              {{goods.cnt*goods.price/100.0}}
+              {{format.formatGermanyMoney(goods.cnt*goods.price)}}
             </van-col>
             <van-col span="1">
               <van-button size="mini" icon="delete" color="red"  @click="deleteGood(order.key, goods.code)"></van-button>
@@ -134,6 +134,7 @@ import { ref, onMounted,computed } from 'vue'
 import {showConfirmDialog,showFailToast,showSuccessToast} from 'vant'
 import menuJson from '../assets/menu.json'
 import storage from "../utils/storage";
+import format from "../utils/format";
 
 // 显示底部栏按钮、显示对话框
 const showBottom = ref(false)
@@ -280,7 +281,7 @@ const total = computed(() => {
     }
   }
 
-  return sum/100.0;
+  return format.formatGermanyMoney(sum)
 })
 
 // 删除商品方法

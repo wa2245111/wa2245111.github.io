@@ -67,9 +67,15 @@ const finished = ref(false);
 const refreshing = ref(false);
 
 
+const getNumber = (str) => {
+  const num = parseInt(str.substring(6), 10);
+  return isNaN(num) ? 0 : num;
+};
+
 const onLoad = () => {
   // 拼接数据
-  const keys = storage.getTableKeys();
+  const keys = storage.getTableKeys().sort((a,b) => getNumber(a) - getNumber(b));
+
   if(keys.length > 0) {
     for(const item of keys) {
       list.value.push({
