@@ -26,6 +26,18 @@
         </van-row>
       </div>
     </div>
+
+    <van-search
+        v-model="searchTxt"
+        show-action
+        label="搜索"
+        placeholder="请输入搜索关键词"
+    >
+      <template #action>
+        <div @click="onSearch">搜索</div>
+      </template>
+    </van-search>
+
     <van-grid :column-num="2" :gutter="10">
         <van-grid-item
             v-for="category in menuData"
@@ -72,7 +84,7 @@
         <van-stepper :long-press="false" v-model.number="chooseCnt" integer input-width="100px" button-size="50px"   />
       </div>
     </van-dialog>
-    <!-- 底部弹出 -->
+    <!-- 分类的菜品 -->
     <van-popup
         v-model:show="showBottom"
         position="bottom"
@@ -85,6 +97,62 @@
             v-for="goods in currentCategory.goodsList"
             :key="goods.code"
             @click="handleGoodsClick(goods)"
+            class="category-item"
+        >
+          <div class="content-wrapper">
+            <div class="image-container">
+              <van-image
+                  :src="getImageUrl(goods.icon)"
+                  class="category-image"
+              >
+                <template #error>
+                  <div class="image-placeholder">
+                    <van-icon name="photo-fail" size="24" />
+                  </div>
+                </template>
+                <template #loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+            </div>
+            <div class="category-name">
+              {{ goods.name }}
+            </div>
+            <div class="category-name">
+              {{ goods.code }}
+            </div>
+            <div class="category-name">
+              <span class="price">{{format.formatGermanyMoney(goods.price)}}</span>
+            </div>
+          </div>
+        </van-grid-item>
+      </van-grid>
+    </van-popup>
+
+
+    <!-- 搜索的菜品 -->
+
+    <van-dialog v-model:show="showSearchStepDialog" title="Confirm" show-cancel-button
+                :before-close="clearSearchStep"
+                @confirm="addSearchGoods"
+                @cancel="clearSearchStep"
+    >
+      <div style="width: 100%;display: flex;justify-content: space-around">
+        <van-stepper :long-press="false" v-model.number="searchChooseCnt" integer input-width="100px" button-size="50px"   />
+      </div>
+    </van-dialog>
+    <van-popup
+        v-model:show="showSearchBottom"
+        position="bottom"
+        :style="{ height: '80%' }"
+        z-index="1000"
+        @close="clearSearch"
+    >
+      <van-grid :column-num="2" :gutter="10">
+        <van-grid-item
+            v-for="goods in searchData"
+            :key="goods.code"
+            @click="handleSearchGoodsClick(goods)"
             class="category-item"
         >
           <div class="content-wrapper">
@@ -130,10 +198,24 @@ import { useRoute } from 'vue-router'
 
 
 // 显示底部栏按钮、显示对话框
+// 菜品popup
 const showBottom = ref(false)
+// 搜索菜品popup
+const showSearchBottom = ref(false)
+// 菜品选中步进器对话框
 const showDialog = ref(false)
+// 搜索菜品选中步进器对话框
+const showSearchStepDialog = ref(false)
+// 菜品选中数量步进器值
 const chooseCnt = ref(1)
+// 搜索菜品选中数量步进器值
+const searchChooseCnt = ref(1)
+// 桌号输入对话框
 const showTableNumberDialog = ref(false)
+// 搜素文本框值
+const searchTxt = ref('')
+// 搜索过滤的可选结果
+const searchData = ref([])
 
 
 // 菜单数据
@@ -143,6 +225,8 @@ const menuData = ref([])
 const currentCategory= ref({})
 // 当前选中产品数据
 const currentGoods = ref({})
+
+const currentSearchGoods = ref({})
 
 
 // 已点菜单数据
@@ -155,8 +239,6 @@ const route = useRoute()
 
 // 正确获取查询参数
 const tdNumber = route.query.tdNumber
-
-// const tdNumber = router.query.tdNumber
 
 onMounted(() => {
   menuData.value = menuJson
@@ -199,10 +281,18 @@ const clearCategory = () => {
   showBottom.value = false;
 }
 
+const clearSearch = () => {
+  searchData.value = [];
+  searchTxt.value = '';
+  currentSearchGoods.value = {}
+  showSearchBottom.value = false;
+}
+
 // 清除选中的所有数据
 const clearAllChoose = () => {
   clearGoods();
   clearCategory();
+  clearSearch();
 }
 
 
@@ -214,7 +304,9 @@ const getImageUrl = (name) => {
   }
 }
 
-
+/**
+ * 点击分类
+ */
 const handleCategoryClick = (category) => {
   if(tableNumber.value === undefined) {
     showTableNumberDialog.value = true;
@@ -224,6 +316,9 @@ const handleCategoryClick = (category) => {
   }
 }
 
+/**
+ * 点击菜品
+ */
 const handleGoodsClick = (goods) => {
   currentGoods.value = goods;
   showDialog.value = true;
@@ -231,7 +326,9 @@ const handleGoodsClick = (goods) => {
 
 
 
-
+/**
+ * 点击分类方式增加菜品
+ */
 const addGoods = () => {
   const goods = currentGoods.value
   let item = {
@@ -239,7 +336,6 @@ const addGoods = () => {
   }
   const currentCategoryName = currentCategory.value.name;
   const currentCategoryId = currentCategory.value.id;
-
   if(Object.hasOwn(orderedData.value, currentCategoryId)) {
     const existCategory = orderedData.value[currentCategoryId];
     let findGoods = false;
@@ -265,7 +361,10 @@ const addGoods = () => {
 }
 
 
-// 按订单key排序的订单数组
+
+/**
+ * 按订单key排序的订单数组
+*/
 const sortedOrders = computed(() => {
   return Object.keys(orderedData.value)
       .sort((a, b) => a - b) // 数字排序
@@ -275,6 +374,9 @@ const sortedOrders = computed(() => {
       }));
 });
 
+/**
+ * 计算总价
+ */
 const total = computed(() => {
   let sum = 0;
   for (const categoryId in orderedData.value) {
@@ -289,7 +391,10 @@ const total = computed(() => {
   return format.formatGermanyMoney(sum)
 })
 
-// 删除商品方法
+
+/**
+ * 删除菜品
+ */
 const deleteGood = (orderKey, code) => {
   showConfirmDialog({
     title: '确认删除',
@@ -312,6 +417,9 @@ const deleteGood = (orderKey, code) => {
   });
 };
 
+/**
+ * 提交餐桌选中菜品信息
+ */
 const onSubmit = () => {
   if(tableNumber.value === undefined) {
     showFailToast('桌号不能为空');
@@ -330,6 +438,91 @@ const onSubmit = () => {
   }).catch(() => {
     // 取消操作
   });
+}
+
+
+/**
+ * 搜索菜品，筛选出符合条件的菜品信息
+ */
+const onSearch = () => {
+  const searchText = searchTxt.value;
+  if(searchText === '') {
+    return;
+  }
+  if(tableNumber.value === undefined) {
+    showTableNumberDialog.value = true;
+    return;
+  }
+  searchData.value = [];
+  // 查询菜品显示菜品信息
+  for (let i = 0; i < menuJson.length; i++) {
+    const category = menuJson[i];
+    for(let j=0; j<category.goodsList.length; j++) {
+      const goods = category.goodsList[j];
+      if(goods.name.includes(searchText) || goods.code.includes(searchText)) {
+        searchData.value.push({
+          ...goods,
+          categoryId: category.id,
+          categoryName: category.name
+        });
+      }
+    }
+  }
+  showSearchBottom.value = true;
+}
+
+/**
+ * 清除搜索步进器对话框
+ */
+const clearSearchStep = () => {
+  showSearchStepDialog.value = false;
+  searchChooseCnt.value = 1;
+}
+
+
+/**
+ * 处理搜索菜品点击事件
+ * @param goods
+ */
+const handleSearchGoodsClick = (goods) => {
+  currentSearchGoods.value = goods;
+  showSearchStepDialog.value = true;
+}
+
+
+/**
+ * 增加搜索菜品到订单中
+ */
+const addSearchGoods = () => {
+  const goods = currentSearchGoods.value
+  let item = {
+    ...goods
+  }
+  const currentCategoryName = currentSearchGoods.value.categoryName;
+  const currentCategoryId = currentSearchGoods.value.categoryId;
+  if(Object.hasOwn(orderedData.value, currentCategoryId)) {
+    const existCategory = orderedData.value[currentCategoryId];
+    let findGoods = false;
+    for(const existGoodsItem of existCategory.goodsList) {
+      // code相同代表菜品相同
+      if(existGoodsItem.code === item.code) {
+        existGoodsItem.cnt = existGoodsItem.cnt + searchChooseCnt.value;
+        findGoods = true;
+        break;
+      }
+    }
+    if(findGoods === false) {
+      item.cnt = searchChooseCnt.value;
+      existCategory.goodsList.push(item)
+    }
+  }else {
+    orderedData.value[currentCategoryId] = {}
+    orderedData.value[currentCategoryId].categoryName = currentCategoryName
+    orderedData.value[currentCategoryId].goodsList = []
+    item.cnt = searchChooseCnt.value;
+    orderedData.value[currentCategoryId].goodsList.push(item)
+  }
+  console.info(orderedData.value)
 }
 </script>
 <style>
