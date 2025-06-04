@@ -245,7 +245,7 @@ const addGoods = () => {
     orderedData.value[currentCategoryId] = {}
     orderedData.value[currentCategoryId].categoryName = currentCategoryName
     orderedData.value[currentCategoryId].goodsList = []
-    item.cnt = 1;
+    item.cnt = chooseCnt.value;
     orderedData.value[currentCategoryId].goodsList.push(item)
   }
 }
@@ -289,6 +289,9 @@ const deleteGood = (orderKey, code) => {
       const category = orderedData.value[categoryId];
 
       category.goodsList = category.goodsList.filter(goods => goods.code !== code);
+      if(category.goodsList.length === 0) {
+        delete orderedData.value[categoryId];
+      }
     }
   }).catch(() => {
     // 取消操作
