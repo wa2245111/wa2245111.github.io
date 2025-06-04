@@ -1,9 +1,7 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Layout from '../views/Layout.vue'
 import Order from '../views/Order.vue'
-import Category from '../views/Category.vue'
 import History from '../views/History.vue'
-import Goods from '../views/Goods.vue'
 
 
 

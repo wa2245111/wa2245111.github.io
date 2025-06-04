@@ -30,9 +30,9 @@
           </van-row>
         </van-row>
         <van-row class="goods-row">
-          <van-col span="8">总计:{{total}}</van-col>
-          <van-col span="10"> <van-field v-model="tableNumber" label="桌号" placeholder="请输入桌号" /></van-col>
-          <van-col span="6"><van-button @click="onSubmit">Submit</van-button></van-col>
+          <van-col span="8" style="text-align: center">总计:<span style="font-weight: bold">{{total}}</span></van-col>
+          <van-col span="8" style="text-align: center">桌号:<span style="color: #ed6a0c;font-weight: bold;">{{tableNumber}}</span></van-col>
+          <van-col span="8"  style="text-align: center"><van-button @click="onSubmit">提交</van-button></van-col>
         </van-row>
       </div>
 
@@ -66,6 +66,15 @@
           </div>
         </van-grid-item>
       </van-grid>
+
+    <van-dialog v-model:show="showTableNumberDialog" title="输入桌号" show-cancel-button
+                @confirm="confirmTableNumber"
+
+    >
+      <div style="width: 100%;display: flex;justify-content: space-around">
+        <van-field v-model="inputTableNumber" type="number" placeholder="请输入桌号"></van-field>
+      </div>
+    </van-dialog>
 
     <van-dialog v-model:show="showDialog" title="Confirm" show-cancel-button
                 :before-close="clearGoods"
@@ -122,13 +131,15 @@
 
 <script setup>
 import { ref, onMounted,computed } from 'vue'
-import {showConfirmDialog} from 'vant'
+import {showConfirmDialog,showFailToast,showSuccessToast} from 'vant'
 import menuJson from '../assets/menu.json'
+import storage from "../utils/storage";
 
 // 显示底部栏按钮、显示对话框
 const showBottom = ref(false)
 const showDialog = ref(false)
 const chooseCnt = ref(1)
+const showTableNumberDialog = ref(false)
 
 // 菜单数据
 const menuData = ref([])
@@ -141,12 +152,35 @@ const currentGoods = ref({})
 
 // 已点菜单数据
 const orderedData = ref({})
-const tableNumber = ref(0)
+// 桌号
+const tableNumber = ref(undefined)
+const inputTableNumber = ref(undefined)
 
 onMounted(() => {
   menuData.value = menuJson
   orderedData.value = {}
 })
+
+const confirmTableNumber = () => {
+  const num = inputTableNumber.value;
+  if(storage.get("table_" + num) === null){
+    tableNumber.value = inputTableNumber.value;
+    showTableNumberDialog.value = false;
+  }else {
+    showConfirmDialog({
+      title: '确认桌号',
+      message:
+          '当前桌号' + num + '存在历史数据,是否选择当前桌号？',
+    })
+    .then(() => {
+      tableNumber.value = inputTableNumber.value;
+      showTableNumberDialog.value = false;
+    })
+    .catch(() => {
+    });
+  }
+
+}
 
 const clearGoods = () => {
   currentGoods.value = {}
@@ -176,14 +210,20 @@ const getImageUrl = (name) => {
 
 
 const handleCategoryClick = (category) => {
-  currentCategory.value = category
-  showBottom.value = true
+  if(tableNumber.value === undefined) {
+    showTableNumberDialog.value = true;
+  }else {
+    currentCategory.value = category
+    showBottom.value = true
+  }
 }
 
 const handleGoodsClick = (goods) => {
   currentGoods.value = goods;
   showDialog.value = true;
 }
+
+
 
 
 const addGoods = () => {
@@ -264,14 +304,22 @@ const deleteGood = (orderKey, code) => {
 };
 
 const onSubmit = () => {
-  // showConfirmDialog({
-  //   title: '确认删除',
-  //   message: '确定要删除该商品吗？',
-  // }).then(() => {
-  //   orderedData[orderKey].goodsList.splice(index, 1);
-  // }).catch(() => {
-  //   // 取消操作
-  // });
+  if(tableNumber.value === undefined) {
+    showFailToast('桌号不能为空');
+    return;
+  }
+  showConfirmDialog({
+    title: '桌号' + tableNumber.value + '菜单确认完成？',
+  }).then(() => {
+    storage.set('table_'+tableNumber.value, orderedData.value)
+    // 清空数据
+    clearAllChoose();
+    orderedData.value = {};
+    tableNumber.value = undefined;
+    showSuccessToast('提交成功');
+  }).catch(() => {
+    // 取消操作
+  });
 }
 </script>
 <style>

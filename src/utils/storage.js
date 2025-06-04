@@ -8,5 +8,13 @@ export default {
   },
   remove(key) {
     localStorage.removeItem(key)
+  },
+  getTableKeys() {
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      if (!localStorage.key(i).startsWith('table_')) continue;
+      keys.push(localStorage.key(i));
+    }
+    return keys;
   }
 }
