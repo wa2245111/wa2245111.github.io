@@ -100,6 +100,7 @@ import {computed, ref} from "vue";
 import {showConfirmDialog, showSuccessToast} from "vant";
 import storage from "../utils/storage";
 import format from "../utils/format";
+import router from "../router";
 
 const list = ref([]);
 const loading = ref(false);
@@ -189,7 +190,10 @@ const sortedOrders = computed(() => {
 });
 
 const go2Modify = (item) => {
-  showSuccessToast("正在完善")
+  router.push({
+    name: 'Order',
+    query: { tdNumber: getNumber(item.key) }
+  })
 }
 
 const handleDetail = (item) => {

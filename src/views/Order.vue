@@ -125,6 +125,9 @@ import {showConfirmDialog,showFailToast,showSuccessToast} from 'vant'
 import menuJson from '../assets/menu.json'
 import storage from "../utils/storage";
 import format from "../utils/format";
+import { useRoute } from 'vue-router'
+
+
 
 // 显示底部栏按钮、显示对话框
 const showBottom = ref(false)
@@ -148,9 +151,20 @@ const orderedData = ref({})
 const tableNumber = ref(undefined)
 const inputTableNumber = ref(undefined)
 
+const route = useRoute()
+
+// 正确获取查询参数
+const tdNumber = route.query.tdNumber
+
+// const tdNumber = router.query.tdNumber
+
 onMounted(() => {
   menuData.value = menuJson
   orderedData.value = {}
+  if(tdNumber !== undefined){
+    tableNumber.value = tdNumber;
+    orderedData.value = storage.get("table_" + tdNumber)
+  }
 })
 
 const confirmTableNumber = () => {
