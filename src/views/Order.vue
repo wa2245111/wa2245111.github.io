@@ -38,30 +38,22 @@
       </template>
     </van-search>
 
-    <van-grid :column-num="2" :gutter="10">
+    <van-grid :column-num="3" :gutter="2">
         <van-grid-item
             v-for="category in menuData"
             :key="category.id"
-            class="category-item"
+            class="my-grid-item"
             @click="handleCategoryClick(category)"
         >
-          <div class="content-wrapper">
+          <div class="category-content-wrapper">
             <div class="image-container">
               <van-image
                   :src="getImageUrl(category.icon)"
-                  class="grid-image"
+                  class="my-grid-image"
               >
-                <template #error>
-                  <div class="image-placeholder">
-                    <van-icon name="photo-fail" size="24" />
-                  </div>
-                </template>
-                <template #loading>
-                  <van-loading type="spinner" size="20" />
-                </template>
               </van-image>
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               {{ category.name }}
             </div>
           </div>
@@ -92,36 +84,28 @@
         z-index="1000"
         @close="clearCategory"
     >
-      <van-grid :column-num="2" :gutter="10">
+      <van-grid  :column-num="3" :gutter="2">
         <van-grid-item
             v-for="goods in currentCategory.goodsList"
             :key="goods.code"
             @click="handleGoodsClick(goods)"
-            class="category-item"
+            class="my-grid-item"
         >
-          <div class="content-wrapper">
+          <div class="goods-content-wrapper">
             <div class="image-container">
               <van-image
                   :src="getImageUrl(goods.icon)"
-                  class="grid-image"
+                  class="my-grid-image"
               >
-                <template #error>
-                  <div class="image-placeholder">
-                    <van-icon name="photo-fail" size="24" />
-                  </div>
-                </template>
-                <template #loading>
-                  <van-loading type="spinner" size="20" />
-                </template>
               </van-image>
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               {{ goods.name }}
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               {{ goods.code }}
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               <span class="price">{{format.formatGermanyMoney(goods.price)}}</span>
             </div>
           </div>
@@ -148,36 +132,28 @@
         z-index="1000"
         @close="clearSearch"
     >
-      <van-grid :column-num="2" :gutter="10">
+      <van-grid  :column-num="3" :gutter="2">
         <van-grid-item
             v-for="goods in searchData"
             :key="goods.code"
             @click="handleSearchGoodsClick(goods)"
-            class="category-item"
+            class="my-grid-item"
         >
-          <div class="content-wrapper">
+          <div class="goods-content-wrapper">
             <div class="image-container">
               <van-image
                   :src="getImageUrl(goods.icon)"
-                  class="grid-image"
+                  class="my-grid-image"
               >
-                <template #error>
-                  <div class="image-placeholder">
-                    <van-icon name="photo-fail" size="24" />
-                  </div>
-                </template>
-                <template #loading>
-                  <van-loading type="spinner" size="20" />
-                </template>
               </van-image>
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               {{ goods.name }}
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               {{ goods.code }}
             </div>
-            <div class="grid-name">
+            <div class="my-grid-name">
               <span class="price">{{format.formatGermanyMoney(goods.price)}}</span>
             </div>
           </div>
@@ -557,15 +533,27 @@ const addSearchGoods = () => {
 }
 
 /* 网格项样式 */
-.category-item {
+.my-grid-item {
   padding: 0;
   margin: 0;
 }
 
-.content-wrapper {
+.category-content-wrapper {
   width: 100%;
-  height: 160px;
-  padding: 16px;
+  height: 80px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.goods-content-wrapper {
+  width: 100%;
+  height: 110px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -577,7 +565,7 @@ const addSearchGoods = () => {
 /* 图片容器 */
 .image-container {
   width: 100%;
-  height: 100px;
+  height: 50px;
   margin-bottom: 8px;
   display: flex;
   justify-content: center;
@@ -585,63 +573,37 @@ const addSearchGoods = () => {
 }
 /* 保持网格项宽度固定 */
 .van-grid-item {
-  flex-basis: 50% !important;
-  max-width: 50% !important;
+  flex-basis: 32% !important;
+  max-width: 32% !important;
   min-width: 0 !important; /* 重要：防止内容撑开 */
 }
 /* 图片样式 */
-.grid-image {
-  width: 80px;
-  height: 80px;
-
-:deep(.van-image) {
-  width: 100%;
-  height: 100%;
+.my-grid-image {
+  width: 50px;
+  height: 50px;
+  :deep(.van-image) {
+    width: 100%;
+    height: 100%;
+  }
+  :deep(img) {
+    object-fit: contain;
+  }
 }
 
-:deep(img) {
-  object-fit: contain;
-}
-}
-
-/* 占位符样式 */
-.image-placeholder {
-  width: 80px;
-  height: 80px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
-}
-
-/* 分类名称 */
-.grid-name {
-  font-size: 16px;
+.my-grid-name {
+  font-size: 12px;
   font-weight: 500;
   color: #333;
   text-align: center;
   line-height: 1;
   width: 100%;
-
   /* 新增换行控制 */
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* 最多显示10行 */
+  -webkit-line-clamp: 5; /* 最多显示5行 */
   -webkit-box-orient: vertical;
   word-break: break-word; /* 允许单词断开 */
   overflow: visible;
 }
-
-/* 点击效果 */
-.content-wrapper {
-  transition: transform 0.2s;
-&:active {
-   transform: scale(0.98);
-   background: #9af5c6 !important;
- }
-}
-
 
 .price {
   color: orangered;
