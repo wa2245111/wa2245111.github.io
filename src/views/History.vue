@@ -85,7 +85,7 @@
             <!-- 固定底部：总计 -->
             <div class="total-footer">
               <div class="total-container">
-                <span class="total-label">总计：</span>
+                <span class="total-label">Total：</span>
                 <span class="total-value">{{total}}</span>
               </div>
             </div>
@@ -122,7 +122,7 @@ const onLoad = () => {
   if(keys.length > 0) {
     for(const item of keys) {
       list.value.push({
-        "name": '桌号:' + item.substring(6),
+        "name": 'Tisch:' + item.substring(6),
         "key" : item
       });
     }
