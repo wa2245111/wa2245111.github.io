@@ -302,6 +302,9 @@ const clearAllChoose = () => {
 
 const getImageUrl = (name) => {
   try {
+    if(name ===undefined || name ==='') {
+      return ''
+    }
     return new URL(`../assets/${name}`, import.meta.url).href
   } catch {
     return ''
