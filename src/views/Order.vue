@@ -459,7 +459,8 @@ const onSearch = () => {
     const category = menuJson[i];
     for(let j=0; j<category.goodsList.length; j++) {
       const goods = category.goodsList[j];
-      if(goods.name.includes(searchText) || goods.code.includes(searchText)) {
+      const pattern = new RegExp(searchText, 'i');
+      if(pattern.test(goods.name) || pattern.test(goods.code)) {
         searchData.value.push({
           ...goods,
           categoryId: category.id,
