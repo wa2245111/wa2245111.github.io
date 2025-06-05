@@ -57,6 +57,7 @@
           <div class="category-content-wrapper">
             <div class="image-container">
               <van-image
+                  fit="scale-down"
                   :src="getImageUrl(category.icon)"
                   class="my-grid-image"
               >
@@ -103,6 +104,7 @@
           <div class="goods-content-wrapper">
             <div class="image-container">
               <van-image
+                  fit="scale-down"
                   :src="getImageUrl(goods.icon)"
                   class="my-grid-image"
               >
@@ -151,6 +153,7 @@
           <div class="goods-content-wrapper">
             <div class="image-container">
               <van-image
+                  fit="scale-down"
                   :src="getImageUrl(goods.icon)"
                   class="my-grid-image"
               >
