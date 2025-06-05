@@ -64,7 +64,7 @@
       <div class="popup-content">
           <div style="background: white; padding: 16px">
             <!-- 标题 -->
-            <h1 style="text-align: center; margin-bottom: 20px">{{tableNumberStr}}</h1>
+            <h2 style="text-align: center; margin-bottom: 20px">{{tableNumberStr}}</h2>
 
             <!-- 分类列表 -->
             <div v-for="order in sortedOrders" :key="order.key" class="order-item">
@@ -370,14 +370,12 @@ const clearDetail = () => {
   color: white;
   padding: 8px 12px;
   border-radius: 4px;
-  margin: 12px 0 8px;
   font-weight: bold;
 }
 
 /* 商品行样式 */
 .goods-row {
   display: flex;
-  padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
   align-items: center;
 }
@@ -421,10 +419,11 @@ const clearDetail = () => {
 
 /* 订单项间距 */
 .order-item {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .popup-content {
+  padding: 5px 0px;
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
