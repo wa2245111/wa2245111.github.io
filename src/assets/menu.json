@@ -1068,7 +1068,7 @@
   {
   "id":18,
   "name": "Aperetif trinke",
-  "icon": "",
+  "icon": "Aperetif_trinke.jpg",
   "goodsList": [
     {
       "icon": "",
@@ -1111,7 +1111,7 @@
   {
     "id":19,
     "name": "Weine trinke",
-    "icon": "",
+    "icon": "Weine_trinke.jpg",
     "goodsList": [
       {
         "icon": "",
@@ -1272,7 +1272,7 @@
         "price": 250
       },
       {
-        "code": "FL.Wasse",
+        "code": "FL.Wasser",
         "icon": "",
         "name": "FL.Wasser Mineral/Still",
         "price": 690
@@ -1319,7 +1319,7 @@
   {
     "id":23,
     "name": "Warme Getränke",
-    "icon": "",
+    "icon": "Warme_Getränke.jpg",
     "goodsList": [
       {
         "icon": "",
@@ -1348,7 +1348,7 @@
       {
         "code": "Jasmin Tee",
         "icon": "",
-        "name": "Kännchen Jasmin- oder Grüner Tee/ Glühwein",
+        "name": "Chinesischer Tee",
         "price": 400
       }
     ]
@@ -1389,5 +1389,66 @@
         "price": 500
       }
     ]
-  }
+  },
+  {
+    "id":25,
+    "name": "157-999 Andere",
+    "icon": "drink.png",
+    "goodsList": [
+      {
+        "code": "157-Reis",
+        "icon": "drink.png",
+        "name": "Reis",
+        "price": 200
+      },
+      {
+        "code": "158-Mango Soße",
+        "icon": "drink.png",
+        "name": "Mango Soße",
+        "price": 450
+      },
+      {
+        "code": "159-Orange Soße",
+        "icon": "drink.png",
+        "name": "Orange Soße",
+        "price": 350
+      },
+      {
+        "code": "160-K.Soße",
+        "icon": "drink.png",
+        "name": "K.Soße",
+        "price": 120
+      },
+      {
+        "code": "161- Cashewnuss",
+        "icon": "drink.png",
+        "name": "Cashewnuss",
+        "price": 200
+      },
+      {
+        "icon": "drink.png",
+        "code": "999-Verparkungr",
+        "name": "Verparkung",
+        "price": 60
+      },
+      {
+        "icon": "drink.png",
+        "code": "237-Mayo/Ketchup",
+        "name": "Mayo/Ketchup",
+        "price": 50
+      },
+      {
+        "icon": "drink.png",
+        "code": "337-Eiskugeln",
+        "name": "Eiskugeln",
+        "price": 200
+      },
+      {
+        "icon": "drink.png",
+        "code": "666-Buffet",
+        "name": "Buffet",
+        "price": 1980
+      }
     ]
+  }
+]
