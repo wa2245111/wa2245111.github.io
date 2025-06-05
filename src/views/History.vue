@@ -75,9 +75,9 @@
 
               <!-- 商品列表 -->
               <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" class="goods-row">
-                <van-col span="6" class="goods-code">{{goods.code}}</van-col>
+                <van-col span="9" class="goods-code">{{goods.code}}</van-col>
                 <van-col span="6" class="goods-price">{{format.formatGermanyMoney(goods.price)}}</van-col>
-                <van-col span="6" class="goods-quantity">{{goods.cnt}}</van-col>
+                <van-col span="3" class="goods-quantity">{{goods.cnt}}</van-col>
                 <van-col span="6" class="goods-total">{{format.formatGermanyMoney(goods.cnt*goods.price)}}</van-col>
               </div>
             </div>
@@ -385,7 +385,14 @@ const clearDetail = () => {
 /* 商品信息样式 */
 .goods-code, .goods-price, .goods-quantity, .goods-total {
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
+  /* 核心解决方案 */
+  word-break: break-all;     /* 允许在任意字符间断行 */
+  overflow-wrap: break-word; /* 优先尝试保留单词完整，超长时强制断行 */
+
+  /* 可选增强 */
+  white-space: normal !important; /* 强制覆盖可能存在的 nowrap 样式 */
+  hyphens: auto;             /* 支持连字符断词（按需添加） */
 }
 
 .goods-price, .goods-total {
@@ -441,13 +448,13 @@ const clearDetail = () => {
 }
 
 .total-label {
-  font-size: 16px;
+  font-size: 30px;
   margin-right: 8px;
 }
 
 .total-value {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 30px;
   color: #ee0a24;
 }
 </style>
