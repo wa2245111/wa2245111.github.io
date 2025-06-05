@@ -552,7 +552,7 @@ const addSearchGoods = () => {
 
 .goods-content-wrapper {
   width: 100%;
-  height: 110px;
+  height: 120px;
   padding: 5px;
   display: flex;
   flex-direction: column;
