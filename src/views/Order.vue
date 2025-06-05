@@ -27,16 +27,24 @@
       </div>
     </div>
 
-    <van-search
-        v-model="searchTxt"
-        show-action
-        label="搜索"
-        placeholder="请输入搜索关键词"
-    >
-      <template #action>
-        <div @click="onSearch">搜索</div>
-      </template>
-    </van-search>
+    <van-row>
+      <van-col span="5" style="display: flex;align-items: center">
+        <van-button icon="plus" type="primary" size="mini"  plain @click="handleAddCustomerGoodsClick">添加菜品</van-button>
+      </van-col>
+      <van-col span="19" style="text-align: center">
+            <van-search
+                v-model="searchTxt"
+                show-action
+                label=""
+                placeholder="请输入搜索关键词"
+            >
+              <template #action>
+                <div @click="onSearch">搜索</div>
+              </template>
+            </van-search>
+      </van-col>
+    </van-row>
+
 
     <van-grid :column-num="3" :gutter="2">
         <van-grid-item
@@ -160,6 +168,17 @@
         </van-grid-item>
       </van-grid>
     </van-popup>
+
+    <!--自定义菜品 -->
+    <van-dialog v-model:show="showCustomGoodsDialog" title="Confirm" show-cancel-button
+                :before-close="clearCustomerGoods"
+                @confirm="addCustomGoods"
+                @cancel="clearCustomerGoods"
+    >
+      <van-field v-model="customerGoods.name" label="菜品名称" placeholder="请输入菜品名称" />
+      <van-field v-model="customerGoods.code" label="菜品编码" placeholder="请输入菜品编码" />
+      <van-field v-model="customerGoods.price" label="菜品价格" placeholder="请输入菜品编码" />
+    </van-dialog>
   </div>
 </template>
 
@@ -192,6 +211,9 @@ const showTableNumberDialog = ref(false)
 const searchTxt = ref('')
 // 搜索过滤的可选结果
 const searchData = ref([])
+// 自定义增加菜品dialog
+const showCustomGoodsDialog = ref(false)
+const customerGoods = ref({})
 
 
 // 菜单数据
@@ -259,9 +281,14 @@ const clearCategory = () => {
 
 const clearSearch = () => {
   searchData.value = [];
-  searchTxt.value = '';
+  // searchTxt.value = '';
   currentSearchGoods.value = {}
   showSearchBottom.value = false;
+}
+
+const clearCustomerGoods = () => {
+  showCustomGoodsDialog.value = false;
+  customerGoods.value = {}
 }
 
 // 清除选中的所有数据
@@ -269,6 +296,7 @@ const clearAllChoose = () => {
   clearGoods();
   clearCategory();
   clearSearch();
+  searchTxt.value = '';
 }
 
 
@@ -499,7 +527,45 @@ const addSearchGoods = () => {
     item.cnt = searchChooseCnt.value;
     orderedData.value[currentCategoryId].goodsList.push(item)
   }
-  console.info(orderedData.value)
+}
+
+const handleAddCustomerGoodsClick = () => {
+  if(tableNumber.value === undefined) {
+    showTableNumberDialog.value = true;
+  }else {
+    showCustomGoodsDialog.value = true
+  }
+}
+
+const addCustomGoods = () => {
+  const goods = customerGoods.value
+  let item = {
+    ...goods
+  }
+  const currentCategoryName = 'Sonstiges';
+  const currentCategoryId = 88888888;
+  if(Object.hasOwn(orderedData.value, currentCategoryId)) {
+    const existCategory = orderedData.value[currentCategoryId];
+    let findGoods = false;
+    for(const existGoodsItem of existCategory.goodsList) {
+      // code相同代表菜品相同
+      if(existGoodsItem.code === item.code) {
+        existGoodsItem.cnt = existGoodsItem.cnt + 1;
+        findGoods = true;
+        break;
+      }
+    }
+    if(findGoods === false) {
+      item.cnt = 1;
+      existCategory.goodsList.push(item)
+    }
+  }else {
+    orderedData.value[currentCategoryId] = {}
+    orderedData.value[currentCategoryId].categoryName = currentCategoryName
+    orderedData.value[currentCategoryId].goodsList = []
+    item.cnt = 1;
+    orderedData.value[currentCategoryId].goodsList.push(item)
+  }
 }
 </script>
 <style>
