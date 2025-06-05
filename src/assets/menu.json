@@ -122,7 +122,7 @@
   {
     "id":2,
     "name": "1-31",
-    "icon": "",
+    "icon": "1-31.jpg",
     "goodsList": [
       {
         "icon": "",
@@ -462,7 +462,7 @@
   {
     "id":6,
     "name":  "61-69 Entenfleisch",
-    "icon": "",
+    "icon": "61-69.jpg",
     "goodsList": [
       {
         "icon": "",
@@ -1177,7 +1177,7 @@
   {
     "id":20,
     "name": "Bier trinke",
-    "icon": "",
+    "icon": "Bier.jpg",
     "goodsList": [
       {
         "icon": "",
@@ -1281,7 +1281,7 @@
   {
     "id":22,
     "name": "Säft/Nektare",
-    "icon": "",
+    "icon": "Säft_Nektare.jpg",
     "goodsList": [
       {
         "icon": "",
