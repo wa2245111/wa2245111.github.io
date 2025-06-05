@@ -49,7 +49,7 @@
             <div class="image-container">
               <van-image
                   :src="getImageUrl(category.icon)"
-                  class="category-image"
+                  class="grid-image"
               >
                 <template #error>
                   <div class="image-placeholder">
@@ -61,7 +61,7 @@
                 </template>
               </van-image>
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               {{ category.name }}
             </div>
           </div>
@@ -103,7 +103,7 @@
             <div class="image-container">
               <van-image
                   :src="getImageUrl(goods.icon)"
-                  class="category-image"
+                  class="grid-image"
               >
                 <template #error>
                   <div class="image-placeholder">
@@ -115,13 +115,13 @@
                 </template>
               </van-image>
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               {{ goods.name }}
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               {{ goods.code }}
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               <span class="price">{{format.formatGermanyMoney(goods.price)}}</span>
             </div>
           </div>
@@ -159,7 +159,7 @@
             <div class="image-container">
               <van-image
                   :src="getImageUrl(goods.icon)"
-                  class="category-image"
+                  class="grid-image"
               >
                 <template #error>
                   <div class="image-placeholder">
@@ -171,13 +171,13 @@
                 </template>
               </van-image>
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               {{ goods.name }}
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               {{ goods.code }}
             </div>
-            <div class="category-name">
+            <div class="grid-name">
               <span class="price">{{format.formatGermanyMoney(goods.price)}}</span>
             </div>
           </div>
@@ -590,7 +590,7 @@ const addSearchGoods = () => {
   min-width: 0 !important; /* 重要：防止内容撑开 */
 }
 /* 图片样式 */
-.category-image {
+.grid-image {
   width: 80px;
   height: 80px;
 
@@ -617,7 +617,7 @@ const addSearchGoods = () => {
 }
 
 /* 分类名称 */
-.category-name {
+.grid-name {
   font-size: 16px;
   font-weight: 500;
   color: #333;
