@@ -366,10 +366,8 @@ const clearDetail = () => {
 
 /* 分类标题样式 */
 .category-title {
-  background-color: #f89705;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
+  font-size: 20px;
+  padding: 1px 0px;
   font-weight: bold;
 }
 
@@ -382,8 +380,9 @@ const clearDetail = () => {
 
 /* 商品信息样式 */
 .goods-code, .goods-price, .goods-quantity, .goods-total {
-  text-align: center;
-  font-size: 20px;
+  text-align: left;
+  padding-left: 5px;
+  font-size: 17px;
   /* 核心解决方案 */
   word-break: break-all;     /* 允许在任意字符间断行 */
   overflow-wrap: break-word; /* 优先尝试保留单词完整，超长时强制断行 */
@@ -394,7 +393,6 @@ const clearDetail = () => {
 }
 
 .goods-price, .goods-total {
-  color: #ee0a24; /* 价格红色突出 */
   font-weight: 500;
 }
 
@@ -402,7 +400,6 @@ const clearDetail = () => {
 .total-row {
   margin-top: 20px;
   padding-top: 12px;
-  border-top: 2px solid #f89705;
 }
 
 .total-text {
@@ -414,7 +411,6 @@ const clearDetail = () => {
 .total-amount {
   font-weight: bold;
   font-size: 18px;
-  color: #ee0a24;
 }
 
 /* 订单项间距 */
@@ -432,7 +428,7 @@ const clearDetail = () => {
 
 /* 底部总计样式 */
 .total-footer {
-  border-top: 2px solid #f89705;
+  border-top: 2px solid #7AE4FF;
   background: white;
   padding: 12px 16px;
   position: sticky;
@@ -454,6 +450,5 @@ const clearDetail = () => {
 .total-value {
   font-weight: bold;
   font-size: 30px;
-  color: #ee0a24;
 }
 </style>
