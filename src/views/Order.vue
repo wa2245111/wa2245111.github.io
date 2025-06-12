@@ -32,20 +32,23 @@
       <van-col span="5" style="display: flex;align-items: center">
         <van-button icon="plus" type="primary" size="mini"  plain @click="handleAddCustomerGoodsClick">添加菜品</van-button>
       </van-col>
-      <van-col span="19" style="text-align: center">
-            <van-search
-                v-model="searchTxt"
-                show-action
-                label=""
-                placeholder="请输入搜索关键词"
-            >
-              <template #action>
-                <div @click="onSearch">搜索</div>
-              </template>
-            </van-search>
+      <van-col span="4" style="display: flex;align-items: center">
+        <van-button  size="small" plain  @click="switchKeyBoard">切换</van-button>
+      </van-col>
+      <van-col  span="11" style="text-align: center">
+        <van-field v-model="searchTxt"  clickable :readonly="keyBoardType == 0" @touchstart.stop="showNumberKeyboard = true"  clearable placeholder="输入搜素内容"/>
+      </van-col>
+      <van-col  span="4" style="display: flex;align-items: center">
+        <van-button   size="small"  plain  @click="onSearch">搜索</van-button>
       </van-col>
     </van-row>
 
+    <van-number-keyboard
+        v-model="searchTxt"
+        :show="showNumberKeyboard && keyBoardType == 0"
+        :maxlength="6"
+        @blur="show = false"
+    />
 
     <van-grid :column-num="3" :gutter="2">
         <van-grid-item
@@ -195,6 +198,9 @@ import format from "../utils/format";
 import { useRoute } from 'vue-router'
 
 
+// 0 数字键盘 1:默认键盘
+const keyBoardType = ref(0);
+const showNumberKeyboard = ref(false)
 
 // 显示底部栏按钮、显示对话框
 // 菜品popup
@@ -250,6 +256,17 @@ onMounted(() => {
     orderedData.value = storage.get("table_" + tdNumber)
   }
 })
+
+const switchKeyBoard = () => {
+  searchTxt.value = ''
+  if(keyBoardType.value == 0){
+    keyBoardType.value = 1;
+    showNumberKeyboard.value = false;
+  }else {
+    keyBoardType.value = 0;
+    showNumberKeyboard.value = true;
+  }
+}
 
 const confirmTableNumber = () => {
   const num = inputTableNumber.value;
