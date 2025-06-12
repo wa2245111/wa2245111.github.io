@@ -46,8 +46,8 @@
     <van-number-keyboard
         v-model="searchTxt"
         :show="showNumberKeyboard && keyBoardType == 0"
+        @blur="showNumberKeyboard = false"
         :maxlength="6"
-        @blur="show = false"
     />
 
     <van-grid :column-num="3" :gutter="2">
