@@ -25,6 +25,15 @@
                   size="small"
                   icon="plus"
                   class="action-btn add"
+                  @click="go2Divide(item)"
+              >
+                分账
+              </van-button>
+              <van-button
+                  type="primary"
+                  size="small"
+                  icon="plus"
+                  class="action-btn add"
                   @click="go2Modify(item)"
               >
                 修改
@@ -192,6 +201,13 @@ const sortedOrders = computed(() => {
 const go2Modify = (item) => {
   router.push({
     name: 'Order',
+    query: { tdNumber: getNumber(item.key) }
+  })
+}
+
+const go2Divide = (item) => {
+  router.push({
+    name: 'Divide',
     query: { tdNumber: getNumber(item.key) }
   })
 }
