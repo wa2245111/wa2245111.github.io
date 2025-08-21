@@ -248,12 +248,15 @@ const route = useRoute()
 // 正确获取查询参数
 const tdNumber = route.query.tdNumber
 
+const goodsCodeMap = ref({})
+
 onMounted(() => {
 
   // 验证menuJson中code和id是否有重复
   // 用于存储已出现的code和id
   const codeSet = new Set();
   const idSet = new Set();
+  const codeMap = {}
   for (const menu of menuJson){
     if (idSet.has(menu.id)){
        alert("id:"+menu.id+" 重复");
@@ -266,8 +269,10 @@ onMounted(() => {
         return;
       }
       codeSet.add(goods.code);
+      codeMap[goods.code] = goods
     }
   }
+  goodsCodeMap.value = codeMap
   menuData.value = menuJson
   orderedData.value = {}
   if(tdNumber !== undefined){
@@ -582,6 +587,10 @@ const handleAddCustomerGoodsClick = () => {
 
 const addCustomGoods = () => {
   const goods = customerGoods.value
+  if (goods.code in goodsCodeMap.value) {
+    showFailToast('菜品编号'+goods.code+'已存在');
+    return;
+  }
   let item = {
     ...goods
   }
