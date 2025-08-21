@@ -249,6 +249,25 @@ const route = useRoute()
 const tdNumber = route.query.tdNumber
 
 onMounted(() => {
+
+  // 验证menuJson中code和id是否有重复
+  // 用于存储已出现的code和id
+  const codeSet = new Set();
+  const idSet = new Set();
+  for (const menu of menuJson){
+    if (idSet.has(menu.id)){
+       alert("id:"+menu.id+" 重复");
+       return;
+    }
+    idSet.add(menu.id);
+    for (const goods of menu.goodsList) {
+      if (codeSet.has(goods.code)){
+        alert("菜品编码:"+goods.code+" 重复");
+        return;
+      }
+      codeSet.add(goods.code);
+    }
+  }
   menuData.value = menuJson
   orderedData.value = {}
   if(tdNumber !== undefined){
