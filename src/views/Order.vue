@@ -12,18 +12,23 @@
           <van-row>
             <span style="font-weight: bold;color:#f89705;word-break: break-word;" >{{order.data.categoryName}}</span>
           </van-row>
-          <van-row v-for="(goods, index) in order.data.goodsList" :key="goods.code" class="goods-row">
-            <van-col span="4" class="line-break">
-              {{goods.code}}</van-col>
-            <van-col span="5" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.price)}}</span></van-col>
-            <van-col span="8" class="line-break">
-              <van-stepper :long-press="false" min="1" v-model="goods.cnt"/>
-            </van-col>
-            <van-col span="6" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.cnt*goods.price)}}</span></van-col>
-            <van-col span="1" class="line-break">
-              <van-button size="mini" icon="delete" color="red" @click="deleteGood(order.key, goods.code)"></van-button>
-            </van-col>
-          </van-row>
+          <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" style="display: flex;flex-direction: column;width: 100%;margin: 1rem">
+            <van-row class="goods-row">
+              <van-col offset="1" span="16" class="line-break">
+                {{goods.code}}</van-col>
+
+            </van-row>
+            <van-row class="goods-row">
+              <van-col :offset="1" span="6" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.price)}}</span></van-col>
+              <van-col span="8" class="line-break">
+                <van-stepper :long-press="false" min="1" v-model="goods.cnt"/>
+              </van-col>
+              <van-col span="6" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.cnt*goods.price)}}</span></van-col>
+              <van-col span="3" class="line-break">
+                <van-button size="mini" icon="delete" color="red" @click="deleteGood(order.key, goods.code)"></van-button>
+              </van-col>
+            </van-row>
+          </div>
         </van-row>
 
       </div>
