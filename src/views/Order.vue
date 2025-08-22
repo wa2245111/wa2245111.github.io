@@ -1,9 +1,14 @@
 <template>
   <div class="container">
+    <!-- 这里放置你的 sticky 内容 -->
+    <van-row class="goods-row" style="z-index: 10000">
+      <van-col span="8" style="text-align: center">总计:<span class="price">{{total}}</span></van-col>
+      <van-col span="8" style="text-align: center">桌号:<span style="color: #ed6a0c;font-weight: bold;">{{tableNumber}}</span></van-col>
+      <van-col span="8" style="text-align: center"><van-button @click="onSubmit">提交</van-button></van-col>
+    </van-row>
     <div class="sticky-container">
-      <div class="sticky-header">
-        <!-- 这里放置你的 sticky 内容 -->
-        <van-row v-for="order in sortedOrders" :key="order.key" style="margin-bottom: 10px">
+      <div class="sticky-header" >
+        <van-row v-for="order in sortedOrders" :key="order.key" >
           <van-row>
             <span style="font-weight: bold;color:#f89705;word-break: break-word;" >{{order.data.categoryName}}</span>
           </van-row>
@@ -20,11 +25,7 @@
             </van-col>
           </van-row>
         </van-row>
-        <van-row class="goods-row">
-          <van-col span="8" style="text-align: center">总计:<span class="price">{{total}}</span></van-col>
-          <van-col span="8" style="text-align: center">桌号:<span style="color: #ed6a0c;font-weight: bold;">{{tableNumber}}</span></van-col>
-          <van-col span="8" style="text-align: center"><van-button @click="onSubmit">提交</van-button></van-col>
-        </van-row>
+
       </div>
     </div>
 
