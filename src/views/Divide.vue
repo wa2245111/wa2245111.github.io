@@ -122,10 +122,10 @@
             </div>
             <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" >
               <van-row >
-                <van-col span="9" >{{goods.code}}</van-col>
+                <van-col span="10" >{{goods.code}}</van-col>
 <!--                <van-col span="4" >{{allocatedCntMap[goods.code]||0}}</van-col>-->
-                <van-col span="4" >{{goods.cnt}}</van-col>
-                <van-col span="7"><van-stepper :long-press="false" min="0" :max="Math.max(Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0),goods.cnt)" v-model.number="divideGoodsCntMap[goods.code]"/></van-col>
+                <van-col span="6" >{{goods.cnt}}</van-col>
+                <van-col span="8"><van-stepper :long-press="false" min="0" :max="Math.max(Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0),goods.cnt)" v-model.number="divideGoodsCntMap[goods.code]"/></van-col>
               </van-row>
             </div>
           </div>
