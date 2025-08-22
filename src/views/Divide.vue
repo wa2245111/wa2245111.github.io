@@ -125,7 +125,7 @@
                 <van-col span="10" >{{goods.code}}</van-col>
 <!--                <van-col span="4" >{{allocatedCntMap[goods.code]||0}}</van-col>-->
                 <van-col span="6" >{{goods.cnt}}</van-col>
-                <van-col span="8"><van-stepper :long-press="false" min="0" :max="Math.max(Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0),goods.cnt)" v-model.number="divideGoodsCntMap[goods.code]"/></van-col>
+                <van-col span="8"><van-stepper :long-press="false" min="0" :max="Math.max(Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0),divideGoodsCntMap[goods.code]||0)" v-model.number="divideGoodsCntMap[goods.code]"/></van-col>
               </van-row>
             </div>
           </div>
