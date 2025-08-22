@@ -19,12 +19,12 @@
 
             </van-row>
             <van-row class="goods-row">
-              <van-col :offset="1" span="6" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.price)}}</span></van-col>
-              <van-col span="8" class="line-break">
+              <van-col span="6" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.price)}}</span></van-col>
+              <van-col span="10" class="line-break">
                 <van-stepper :long-press="false" min="1" v-model="goods.cnt"/>
               </van-col>
               <van-col span="6" class="line-break"><span class="price">{{format.formatGermanyMoney(goods.cnt*goods.price)}}</span></van-col>
-              <van-col span="3" class="line-break">
+              <van-col span="2" class="line-break">
                 <van-button size="mini" icon="delete" color="red" @click="deleteGood(order.key, goods.code)"></van-button>
               </van-col>
             </van-row>
