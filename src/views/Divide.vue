@@ -36,7 +36,7 @@
         </div>
 
       <!-- 添加空对象默认值，防止报错 -->
-      <div v-for="([name, cntMap], index) in Object.entries(settledData || {})" :key="name">
+      <div v-for="([name, cntMap], index) in Object.entries(assignedDate || {})" :key="name">
         <van-divider
             :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
         >
@@ -47,7 +47,7 @@
               <van-button style="margin-left: 1rem" @click="deleteDivide(name)">Delete</van-button></div>
           </div>
           <div v-for="order in sortedOrders" :key="order.key">
-            <div v-if="showCategory(order,cntMap)">
+            <div v-if="assignedShowCategory(order,cntMap)">
               <div >
                 <span>{{order.data.categoryName}}</span>
               </div>
@@ -70,7 +70,36 @@
       </div>
 
 
-
+      <div v-if="remainOrders['remain'] && remainOrders['remain'].length > 0" >
+          <van-divider
+              :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+          >
+          </van-divider>
+        <div style="display: flex;justify-content: space-around;align-items: center">
+          <div ><span style="font-weight: bold">Not Assigned</span></div>
+        </div>
+          <div v-for="order in remainOrders['remain']" :key="order.key">
+            <div>
+              <div >
+                <span>{{order.data.categoryName}}</span>
+              </div>
+              <!-- 商品列表 -->
+              <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" >
+                <van-row >
+                  <van-col span="9" >{{goods.code}}</van-col>
+                  <van-col span="3" >{{goods.cnt}}</van-col>
+                  <van-col span="6" >{{format.formatGermanyMoney(goods.price)}}</van-col>
+                  <van-col span="6" >{{format.formatGermanyMoney(goods.cnt*goods.price)}}</van-col>
+                </van-row>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex;justify-content: right;">
+            <van-row style="font-weight: bold;font-size: 20px">
+              Total:<span >{{remainOrders["total"]}}</span>
+            </van-row>
+          </div>
+        </div>
     </div>
     <van-popup
         v-model:show="showAddDividePop"
@@ -85,16 +114,18 @@
         <van-field  required :disabled="disableName" v-model="divideName" placeholder="Please Input Name" input-align="center"/>
         <div v-for="order in sortedOrders" :key="order.key">
           <!-- 分类标题 -->
-          <div style="margin-top:0.1rem">
-            <span>{{order.data.categoryName}}</span>
-          </div>
-          <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" >
-            <van-row >
-              <van-col span="9" >{{goods.code}}</van-col>
-              <van-col span="4" >{{allocatedCntMap[goods.code]||0}}</van-col>
-              <van-col span="4" >{{goods.cnt}}</van-col>
-              <van-col span="7"><van-stepper :long-press="false" min="0" :max="Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0)" v-model.number="divideGoodsCntMap[goods.code]"/></van-col>
-            </van-row>
+          <div >
+            <div style="margin-top:0.1rem">
+              <span>{{order.data.categoryName}}</span>
+            </div>
+            <div v-for="(goods, index) in order.data.goodsList" :key="goods.code" >
+              <van-row v-if="Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0)>0">
+                <van-col span="9" >{{goods.code}}</van-col>
+                <van-col span="4" >{{allocatedCntMap[goods.code]||0}}</van-col>
+                <van-col span="4" >{{goods.cnt}}</van-col>
+                <van-col span="7"><van-stepper :long-press="false" min="0" :max="Number(goods.cnt) - Number(allocatedCntMap[goods.code]||0)" v-model.number="divideGoodsCntMap[goods.code]"/></van-col>
+              </van-row>
+            </div>
           </div>
         </div>
         <van-row style="display: flex;justify-content: center">
@@ -120,10 +151,13 @@ const tdNumber = route.query.tdNumber
 const orderedData = ref({});
 const sortedOrders = ref({})
 // 已经分账菜单数据
-const settledData = ref({});
+const assignedDate = ref({});
 
 // 已经分账code-cnt
 const allocatedCntMap = ref({})
+
+// 剩余为分账的菜单数据
+const remainOrders = ref({})
 
 const total = ref(undefined)
 
@@ -160,25 +194,25 @@ onMounted(() => {
         key: Number(key),
         data: orderedData.value[key]
       }));
-  settledData.value = storage.get("divide_table_" + tdNumber)
-  if (settledData.value === null || settledData.value === undefined) {
-    settledData.value = {}
+  assignedDate.value = storage.get("divide_table_" + tdNumber)
+  if (assignedDate.value === null || assignedDate.value === undefined) {
+    assignedDate.value = {}
   }
 
 
 
-  updateAllocatedCntMap()
+  updateAllocatedInfo()
 
   updateTotal()
 })
 
-// 更新已分配code->cnt映射
-const updateAllocatedCntMap = () => {
+// 更新已分配code->cnt映射 以及未分配菜单数据
+const updateAllocatedInfo = () => {
   // 初始化分配数量映射对象（mp）
   const mp = {};
   // 计算每个商品的已分配数量
-  if (settledData.value !== undefined && settledData.value !== null) {
-    for (const [person, goodsCodeCntMap] of Object.entries(settledData.value)) {
+  if (assignedDate.value !== undefined && assignedDate.value !== null) {
+    for (const [person, goodsCodeCntMap] of Object.entries(assignedDate.value)) {
       for (const [goodsCode, goodsCnt] of Object.entries(goodsCodeCntMap)) {
           // 初始化并累加数量
           if (mp[goodsCode] === undefined) {
@@ -189,6 +223,46 @@ const updateAllocatedCntMap = () => {
     }
   }
   allocatedCntMap.value = mp
+
+  const res = {
+    "total": 0,
+    "remain": []
+  }
+  let total = 0
+  for (const order of sortedOrders.value) {
+    const remainGoodsList = []
+    for (const idx in order.data.goodsList) {
+      const goods = order.data.goodsList[idx]
+      if (goods.code in mp && mp[goods.code] !== goods.cnt) {
+          remainGoodsList.push({
+            code: goods.code,
+            name: goods.name,
+            price: goods.price,
+            cnt: goods.cnt - (mp[goods.code]||0) // 剩余数量
+          })
+          total += (goods.cnt - (mp[goods.code]||0)) * goods.price
+      }else if (!(goods.code in mp)) {
+          remainGoodsList.push({
+            code: goods.code,
+            name: goods.name,
+            price: goods.price,
+            cnt: goods.cnt // 剩余数量
+          })
+          total += goods.cnt  * goods.price
+      }
+    }
+    if (remainGoodsList.length > 0) {
+      res["remain"].push({
+        key:order.key,
+        data: {
+          categoryName:order.data.categoryName,
+          goodsList: remainGoodsList
+        }
+      })
+    }
+  }
+  res["total"] = format.formatGermanyMoney(total)
+  remainOrders.value = res
 }
 
 
@@ -225,22 +299,22 @@ const addDivide = () => {
 
 const modifyDivide = (name) => {
   disableName.value = true;
-  const cntMap =  settledData.value[name] || {}
+  const cntMap =  assignedDate.value[name] || {}
   for (const categoryId in orderedData.value) {
     const category = orderedData.value[categoryId];
 
     // 第二层循环：遍历分类下的商品列表
     for (const goods of category.goodsList) {
-      if (!goods.code in cntMap) {
+      if (!(goods.code in cntMap)) {
         cntMap[goods.code] = 0
       }
     }
   }
   divideGoodsCntMap.value = cntMap
   divideName.value = name;
-  delete settledData.value[name];
-  storage.set("divide_table_" + tdNumber, settledData.value)
-  updateAllocatedCntMap()
+  delete assignedDate.value[name];
+  storage.set("divide_table_" + tdNumber, assignedDate.value)
+  updateAllocatedInfo()
   showAddDividePop.value = true;
 }
 
@@ -250,9 +324,9 @@ const deleteDivide = (name) => {
     message: `Are you sure to delete ${name}?`,
   })
       .then(() => {
-        delete settledData.value[name];
-        storage.set("divide_table_" + tdNumber, settledData.value)
-        updateAllocatedCntMap()
+        delete assignedDate.value[name];
+        storage.set("divide_table_" + tdNumber, assignedDate.value)
+        updateAllocatedInfo()
       })
       .catch(() => {});
 }
@@ -276,16 +350,20 @@ const doDivide = () => {
       realDivideMap[goodsCode] = goodsCnt;
     }
   }
-  settledData.value[divideName.value] = realDivideMap
+  if (Object.keys(realDivideMap).length === 0) {
+    delete assignedDate.value[divideName.value];
+  }else {
+    assignedDate.value[divideName.value] = realDivideMap
+  }
   // 计算总价
 
-  storage.set("divide_table_" + tdNumber, settledData.value)
-  updateAllocatedCntMap()
+  storage.set("divide_table_" + tdNumber, assignedDate.value)
+  updateAllocatedInfo()
   clearDivide()
 }
 
 
-const showCategory = (order,v) => {
+const assignedShowCategory = (order,cntMap) => {
   // 基础校验
   if (!order?.data?.goodsList || !Array.isArray(order.data.goodsList)) {
     return false;
@@ -294,7 +372,7 @@ const showCategory = (order,v) => {
   // 检查是否有符合条件的商品
   return order.data.goodsList.some(item => {
     return item?.code != null
-        && item.code in v;
+        && item.code in cntMap;
   });
 }
 
