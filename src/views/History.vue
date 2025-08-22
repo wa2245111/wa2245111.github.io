@@ -179,6 +179,7 @@ const confirmDelete = (item) => {
   })
   .then(() => {
     storage.remove(item.key);
+    storage.remove('divide_'+item.key)
     showSuccessToast('删除成功');
     onRefresh();
   })
