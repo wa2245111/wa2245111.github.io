@@ -342,8 +342,12 @@ const clearDivide = () => {
 // 分账
 const doDivide = () => {
   // 校验参数
-  if (divideName.value === undefined || divideGoodsCntMap.value === null) {
+  if (divideName.value === undefined || divideName.value ==='') {
     showSuccessToast("Please Input Name");
+    return;
+  }
+  if(!disableName.value && divideName.value in assignedDate.value) {
+    showSuccessToast("Name Already Exists");
     return;
   }
   const realDivideMap = {}
