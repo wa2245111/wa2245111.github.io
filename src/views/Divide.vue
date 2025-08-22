@@ -41,10 +41,12 @@
             :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
         >
         </van-divider>
+        <div style="display: flex;justify-content: right;align-items: center">
+          <div ><van-button @click="modifyDivide(name)">Modify</van-button>
+            <van-button style="margin-left: 1rem" @click="deleteDivide(name)">Delete</van-button></div>
+        </div>
           <div style="display: flex;justify-content: space-around;align-items: center">
             <div ><span style="font-weight: bold">{{name}}</span></div>
-            <div ><van-button @click="modifyDivide(name)">Modify</van-button>
-              <van-button style="margin-left: 1rem" @click="deleteDivide(name)">Delete</van-button></div>
           </div>
           <div v-for="order in sortedOrders" :key="order.key">
             <div v-if="assignedShowCategory(order,cntMap)">
