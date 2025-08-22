@@ -301,9 +301,11 @@ const confirmTableNumber = () => {
     showConfirmDialog({
       title: '确认桌号',
       message:
-          '当前桌号' + num + '存在历史数据,是否选择当前桌号？',
+          '当前桌号' + num + '存在历史数据,是否覆盖桌号信息？',
     })
     .then(() => {
+      storage.remove("table_" + num);
+      storage.remove('divide_'+"table_" + num)
       tableNumber.value = inputTableNumber.value;
       showTableNumberDialog.value = false;
     })
