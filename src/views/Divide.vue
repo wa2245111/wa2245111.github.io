@@ -36,7 +36,7 @@
         </div>
 
       <!-- 添加空对象默认值，防止报错 -->
-      <div v-for="([name, cntMap], index) in Object.entries(assignedDate || {})" :key="name">
+      <div v-for="([name, cntMap], index) in Object.entries(assignedData || {})" :key="name">
         <van-divider
             :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
         >
@@ -153,7 +153,7 @@ const tdNumber = route.query.tdNumber
 const orderedData = ref({});
 const sortedOrders = ref({})
 // 已经分账菜单数据
-const assignedDate = ref({});
+const assignedData = ref({});
 
 // 已经分账code-cnt
 const allocatedCntMap = ref({})
@@ -196,11 +196,33 @@ onMounted(() => {
         key: Number(key),
         data: orderedData.value[key]
       }));
-  assignedDate.value = storage.get("divide_table_" + tdNumber)
-  if (assignedDate.value === null || assignedDate.value === undefined) {
-    assignedDate.value = {}
-  }
+  assignedData.value = storage.get("divide_table_" + tdNumber)
+  if (assignedData.value === null || assignedData.value === undefined) {
+    assignedData.value = {}
+  }else {
+      // 删除已分账但是不在所有已点订单商品中。分账之后，菜单中删除了对应信息
+    const filteredData = {};
+    // 遍历外层对象（每个人的记录）
+      for (const [personKey, goodsMap] of Object.entries(assignedData.value)) {
+        // 为当前人创建一个过滤后的商品映射
+        const filteredGoods = {};
 
+        // 遍历当前人的商品记录
+        for (const [goodsCode, count] of Object.entries(goodsMap)) {
+          // 只保留在codeGoodsMap中存在的商品编码
+          if (codeGoodsMap.value.hasOwnProperty(goodsCode)) {
+              filteredGoods[goodsCode] = count;
+          }
+        }
+
+        // 只有当过滤后仍有商品时，才保留该人的记录
+        if (Object.keys(filteredGoods).length > 0) {
+            filteredData[personKey] = filteredGoods;
+        }
+      }
+    assignedData.value = filteredData
+    storage.set("divide_table_" + tdNumber,filteredData)
+  }
 
 
   updateAllocatedInfo()
@@ -213,8 +235,8 @@ const updateAllocatedInfo = () => {
   // 初始化分配数量映射对象（mp）
   const mp = {};
   // 计算每个商品的已分配数量
-  if (assignedDate.value !== undefined && assignedDate.value !== null) {
-    for (const [person, goodsCodeCntMap] of Object.entries(assignedDate.value)) {
+  if (assignedData.value !== undefined && assignedData.value !== null) {
+    for (const [person, goodsCodeCntMap] of Object.entries(assignedData.value)) {
       for (const [goodsCode, goodsCnt] of Object.entries(goodsCodeCntMap)) {
           // 初始化并累加数量
           if (mp[goodsCode] === undefined) {
@@ -301,7 +323,7 @@ const addDivide = () => {
 
 const modifyDivide = (name) => {
   disableName.value = true;
-  const cntMap =  assignedDate.value[name] || {}
+  const cntMap =  assignedData.value[name] || {}
   for (const categoryId in orderedData.value) {
     const category = orderedData.value[categoryId];
 
@@ -314,8 +336,8 @@ const modifyDivide = (name) => {
   }
   divideGoodsCntMap.value = cntMap
   divideName.value = name;
-  delete assignedDate.value[name];
-  storage.set("divide_table_" + tdNumber, assignedDate.value)
+  delete assignedData.value[name];
+  storage.set("divide_table_" + tdNumber, assignedData.value)
   updateAllocatedInfo()
   showAddDividePop.value = true;
 }
@@ -326,8 +348,8 @@ const deleteDivide = (name) => {
     message: `Are you sure to delete ${name}?`,
   })
       .then(() => {
-        delete assignedDate.value[name];
-        storage.set("divide_table_" + tdNumber, assignedDate.value)
+        delete assignedData.value[name];
+        storage.set("divide_table_" + tdNumber, assignedData.value)
         updateAllocatedInfo()
       })
       .catch(() => {});
@@ -346,7 +368,7 @@ const doDivide = () => {
     showSuccessToast("Please Input Name");
     return;
   }
-  if(!disableName.value && divideName.value in assignedDate.value) {
+  if(!disableName.value && divideName.value in assignedData.value) {
     showSuccessToast("Name Already Exists");
     return;
   }
@@ -357,13 +379,13 @@ const doDivide = () => {
     }
   }
   if (Object.keys(realDivideMap).length === 0) {
-    delete assignedDate.value[divideName.value];
+    delete assignedData.value[divideName.value];
   }else {
-    assignedDate.value[divideName.value] = realDivideMap
+    assignedData.value[divideName.value] = realDivideMap
   }
   // 计算总价
 
-  storage.set("divide_table_" + tdNumber, assignedDate.value)
+  storage.set("divide_table_" + tdNumber, assignedData.value)
   updateAllocatedInfo()
   clearDivide()
 }
