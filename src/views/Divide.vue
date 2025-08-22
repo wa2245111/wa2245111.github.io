@@ -10,7 +10,7 @@
     <div style="overflow: auto;margin-bottom: 5rem">
         <!-- 标题 -->
       <van-row style="display: flex;justify-content: right">
-        <van-button @click="addDivide">Account Splitting</van-button>
+        <van-button @click="addDivide">Erhöhen</van-button>
       </van-row>
         <!-- 分类列表 -->
         <div v-for="order in sortedOrders" :key="order.key">
@@ -42,8 +42,8 @@
         >
         </van-divider>
         <div style="display: flex;justify-content: right;align-items: center">
-          <div ><van-button @click="modifyDivide(name)">Modify</van-button>
-            <van-button style="margin-left: 1rem" @click="deleteDivide(name)">Delete</van-button></div>
+          <div ><van-button @click="modifyDivide(name)">Ändern</van-button>
+            <van-button style="margin-left: 1rem" @click="deleteDivide(name)">Löschen</van-button></div>
         </div>
           <div style="display: flex;justify-content: space-around;align-items: center">
             <div ><span style="font-weight: bold">{{name}}</span></div>
@@ -113,7 +113,7 @@
     >
       <div style="margin-top:2rem;padding-left: 1rem">
         <!-- 标题 -->
-        <van-field  required :disabled="disableName" v-model="divideName" placeholder="Please Input Name" input-align="center"/>
+        <van-field label="Name"  required :disabled="disableName" v-model="divideName" placeholder="Bitte geben Sie einen Namen ein" />
         <div v-for="order in sortedOrders" :key="order.key">
           <!-- 分类标题 -->
           <div >
@@ -367,11 +367,11 @@ const clearDivide = () => {
 const doDivide = () => {
   // 校验参数
   if (divideName.value === undefined || divideName.value ==='') {
-    showSuccessToast("Please Input Name");
+    showSuccessToast("Bitte geben Sie einen Namen ein");
     return;
   }
   if(!disableName.value && divideName.value in assignedData.value) {
-    showSuccessToast("Name Already Exists");
+    showSuccessToast("Der Name existiert bereits");
     return;
   }
   const realDivideMap = {}
