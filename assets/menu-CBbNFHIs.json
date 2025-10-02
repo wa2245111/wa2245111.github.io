@@ -1064,10 +1064,34 @@
         "price": 120
       },
       {
-        "code": "161- Cashewnuss",
+        "code": "171- Cashewnuss",
         "icon": "drink.png",
         "name": "Cashewnuss",
         "price": 200
+      },
+      {
+        "code": "172- K.Cashewnuss",
+        "icon": "drink.png",
+        "name": "K.Cashewnuss",
+        "price": 100
+      },
+      {
+        "code": "173- mit Fleisch",
+        "icon": "drink.png",
+        "name": "mit Fleisch",
+        "price": 500
+      },
+      {
+        "code": "174- mit Garnelen",
+        "icon": "drink.png",
+        "name": "mit Garnelen",
+        "price": 600
+      },
+      {
+        "code": "175- Gemüsemischung",
+        "icon": "drink.png",
+        "name": "Gemüsemischung",
+        "price": 250
       },
       {
         "icon": "drink.png",
