@@ -86,15 +86,15 @@
       </div>
     </van-dialog>
 
-    <van-dialog v-model:show="showDialog" title="Confirm" show-cancel-button
-                :before-close="clearGoods"
-                @confirm="addGoods"
-                @cancel="clearGoods"
-                >
-      <div style="width: 100%;display: flex;justify-content: space-around">
-        <van-stepper :long-press="false" v-model.number="chooseCnt" integer input-width="100px" button-size="50px"   />
-      </div>
-    </van-dialog>
+<!--    <van-dialog v-model:show="showDialog" title="Confirm" show-cancel-button-->
+<!--                :before-close="clearGoods"-->
+<!--                @confirm="addGoods"-->
+<!--                @cancel="clearGoods"-->
+<!--                >-->
+<!--      <div style="width: 100%;display: flex;justify-content: space-around">-->
+<!--        <van-stepper :long-press="false" v-model.number="chooseCnt" integer input-width="100px" button-size="50px"   />-->
+<!--      </div>-->
+<!--    </van-dialog>-->
     <!-- 分类的菜品 -->
     <van-popup
         v-model:show="showBottom"
@@ -381,7 +381,15 @@ const handleCategoryClick = (category) => {
  */
 const handleGoodsClick = (goods) => {
   currentGoods.value = goods;
-  showDialog.value = true;
+  // showDialog.value = true;
+  addGoods()
+  showSuccessToast({
+    message: goods.name+' add successful',
+    duration: 300,
+    position: 'top',
+  });
+  // 清空选择的菜品信息
+  clearGoods()
 }
 
 
