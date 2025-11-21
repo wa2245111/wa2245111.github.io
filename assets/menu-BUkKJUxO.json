@@ -1279,13 +1279,15 @@
         "price": 320
       },
       {
-        "code": "503",
+        "id":"503",
+        "code": "Mei Kwei Lu",
         "icon": "",
         "name": "Mei Kwei Lu",
         "price": 320
       },
       {
-        "code": "504",
+        "id": "504",
+        "code": "Mao Tei",
         "icon": "",
         "name": "Mao Tei",
         "price": 350
@@ -1299,18 +1301,21 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "506",
+        "id": "506",
+        "code": "FL.Sake",
         "name": "FL.Sake",
         "price": 600
       },
       {
-        "code": "507",
+        "id": "507",
+        "code": "PfIaumen",
         "icon": "",
         "name": "PfIaumenwein",
         "price": 250
       },
       {
-        "code": "515",
+        "id": "515",
+        "code": "Lychee",
         "icon": "",
         "name": "Lycheewein",
         "price": 250
@@ -1342,60 +1347,70 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "521",
+        "id": "521",
+        "code": "Rheinhessen",
         "name": "Rheinhessen (IiebIich)",
         "price": 550
       },
       {
-        "code": "522",
+        "id": "522",
+        "code": "Pinot Grigio",
         "icon": "",
         "name": "Pinot Grigio (trocken)",
         "price": 550
       },
       {
-        "code": "523",
+        "id": "523",
+        "code": "Chardonney",
         "icon": "",
         "name": "Chardonney(trocken)",
         "price": 550
       },
       {
-        "code": "524",
+        "id": "524",
+        "code": "Burgunder",
         "icon": "",
         "name": "Weiβer Burgunder (trocken)",
         "price": 550
       },
       {
-        "code": "525",
+        "id": "525",
+        "code": "KaIIfeIs RiesIing",
         "icon": "",
         "name": "KaIIfeIs RiesIing (haIbtrocken)",
         "price": 550
       },
       {
-        "code": "526",
+        "id": "526",
+        "code": "Ros d",
         "icon": "",
         "name": "Ros d,Anjo (trocken)",
         "price": 550
       },
       {
-        "code": "527",
+        "id": "527",
+        "code": "Portugiesischer Ros",
         "icon": "",
         "name": "Portugiesischer Ros (IiebIich)",
         "price": 550
       },
       {
-        "code": "528",
+        "id": "528",
+        "code": "MerIotI Rotwein",
         "icon": "",
         "name": "MerIotI Rotwein (trocken)",
         "price": 550
       },
       {
-        "code": "529",
+        "id": "529",
+        "code": "BordeauxI Rotwein",
         "icon": "",
         "name": "BordeauxI Rotwein (trocken)",
         "price": 550
       },
       {
-        "code": "530",
+        "id": "530",
+        "code": "WeiβweinschorIe",
         "icon": "",
         "name": "WeiβweinschorIe",
         "price": 500
@@ -1409,36 +1424,42 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "562",
+        "id": "562",
+        "code": "G.Bier/Alster",
         "name": "G.Bier/Alster",
         "price": 420
       },
       {
-        "code": "561",
+        "id": "561",
+        "code": "K.Bier/Alster",
         "icon": "",
         "name": "K.Bier/Alster",
         "price": 350
       },
       {
-        "code": "574",
+        "id": "574",
+        "code": "Hefe ,Dunkel",
         "icon": "",
         "name": "Hefe ,Dunkel , Alkoholfrei Weizen",
         "price": 520
       },
       {
-        "code": "571",
+        "id": "571",
+        "code": "alkoholfrei",
         "icon": "",
         "name": "Veltins, alkoholfrei",
         "price": 380
       },
       {
-        "code": "575",
+        "id": "575",
+        "code": "Vitamalz",
         "icon": "",
         "name": "Vitamalz",
         "price": 320
       },
       {
-        "code": "576",
+        "id": "576",
+        "code": "Tsingtao",
         "icon": "",
         "name": "Chinesisches Tsingtao Bier",
         "price": 380
@@ -1452,54 +1473,63 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "582",
+        "id": "582",
+        "code": "G.Coca/Fruchtschorle",
         "name": "G.Coca / light /Zero /Fanta/ Spezi/ Eistee /Fruchtschorle",
         "price": 420
       },
       {
-        "code": "581",
+        "id": "581",
+        "code": "K.Coca/Fruchtschorle",
         "icon": "",
         "name": "K.Coca / light /Zero  /Fanta/ Spezi/ Eistee /Fruchtschorle",
         "price": 250
       },
       {
-        "code": "588",
+        "id": "588",
+        "code": "G.Sprite",
         "icon": "",
         "name": "G.Sprite",
         "price": 420
       },
       {
-        "code": "587",
+        "id": "587",
+        "code": "K.Sprite",
         "icon": "",
         "name": "K.Sprite",
         "price": 250
       },
       {
-        "code": "594",
+        "id": "594",
+        "code": "G.Ginger/Lemon",
         "icon": "",
         "name": "G.Ginger Ale/ Bitter Lemon",
         "price": 480
       },
       {
-        "code": "593",
+        "id": "593",
+        "code": "K.Ginger/Lemon",
         "icon": "",
         "name": "K.Ginger Ale/ Bitter Lemon",
         "price": 300
       },
       {
-        "code": "602",
+        "id": "602",
+        "code": "G.Vilsa",
         "icon": "",
         "name": "G.Vilsa",
         "price": 380
       },
       {
-        "code": "601",
+        "id": "601",
+        "code": "K.Vilsa",
         "icon": "",
         "name": "K.Vilsa",
         "price": 300
       },
       {
-        "code": "603",
+        "id": "603",
+        "code": "FL.Wasser",
         "icon": "",
         "name": "FL.Wasser Mineral/Still",
         "price": 690
@@ -1513,30 +1543,35 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "613-S",
+        "id": "613-S",
+        "code": "G. saft-O/A/T/L",
         "name": "G. saft-Orangen/Apfel/Trauben /Lychee",
         "price": 480
       },
       {
-        "code": "612",
+        "id": "612",
+        "code": "K. saft-O/A/T/L",
         "icon": "",
         "name": "K. saft-Orangen/Apfel/Trauben /Lychee",
         "price": 300
       },
       {
-        "code": "613-G",
+        "id": "613-G",
+        "code": "G.Guaven/K/J",
         "icon": "",
         "name": "G.Guaven/Kirsch/Schwarzer Johannisbeere",
         "price": 480
       },
       {
-        "code": "614",
+        "id": "614",
+        "code": "K.Guaven/KiBa/K/J",
         "icon": "",
         "name": "K.Guaven/ KiBa /Kirsch/Schwarzer Johannisbeere",
         "price": 300
       },
       {
-        "code": "615",
+        "id": "615",
+        "code": "G.KiBa",
         "icon": "",
         "name": "G.KiBa",
         "price": 500
@@ -1550,30 +1585,35 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "621",
+        "id": "621",
+        "code": "Kaffee",
         "name": "Tasse Kaffee",
         "price": 250
       },
       {
-        "code": "622",
+        "id": "622",
+        "code": "Kän.. Kaffee",
         "icon": "",
         "name": "Kännchen Kaffee",
         "price": 550
       },
       {
-        "code": "623",
+        "id": "623",
+        "code": "Espresso/Cap",
         "icon": "",
         "name": "Espresso oder Cappuccino",
         "price": 300
       },
       {
-        "code": "625",
+        "id": "625",
+        "code": "GlasTee",
         "icon": "",
         "name": "Glas Tee (versch.Sorten)",
         "price": 250
       },
       {
-        "code": "626",
+        "id": "626",
+        "code": "Jasmin Tee",
         "icon": "",
         "name": "Chinesischer Tee",
         "price": 450
@@ -1587,30 +1627,35 @@
     "goodsList": [
       {
         "icon": "",
-        "code": "542",
+        "id": "542",
+        "code": "Jiger",
         "name": "BommerIunder /Underberg /Asbach uraIt/JubiIiums Aquavit/MaIteser Kreuz/ Jiger  /Fernet Branca  /Rum  /Baccardi /Wodka",
         "price": 300
       },
       {
-        "code": "541",
+        "id": "541",
+        "code": "Weizenkorn",
         "icon": "",
         "name": "Weizenkorn",
         "price": 250
       },
       {
-        "code": "551",
+        "id": "551",
+        "code": "Johnnie W",
         "icon": "",
         "name": "Johnnie WaIkerr ",
         "price": 450
       },
       {
-        "code": "553",
+        "id": "553",
+        "code": "Ramazzotti",
         "icon": "",
         "name": "Ramazzotti",
         "price": 350
       },
       {
-        "code": "554",
+        "id": "554",
+        "code": "Whisky Cola",
         "icon": "",
         "name": "Whisky Cola/ Campari Orange",
         "price": 500
