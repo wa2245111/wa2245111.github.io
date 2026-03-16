@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id":1,
     "name": "Mittagstisch",
     "icon": "",
     "goodsList": [
@@ -93,8 +93,7 @@
         "icon": "",
         "name": "Nudeln mit Hühnerfleisch hausgemachte",
         "price": 1250
-      },
-      {
+      },{
         "code": "M17",
         "icon": "",
         "name": "Nudeln mit Schweinefleisch",
@@ -121,7 +120,7 @@
     ]
   },
   {
-    "id": 2,
+    "id":2,
     "name": "1-31",
     "icon": "1-31.jpg",
     "goodsList": [
@@ -272,7 +271,7 @@
     ]
   },
   {
-    "id": 3,
+    "id":3,
     "name": "32-42 Schweinefleisch",
     "icon": "",
     "goodsList": [
@@ -280,66 +279,66 @@
         "icon": "",
         "code": "32",
         "name": "Chop Suey mit Schweinefleisch",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "34",
         "icon": "",
         "name": "Gebackenes Schweinefleisch süß saurer soße",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "35",
         "icon": "",
         "name": "Schweinefleisch mit Chin Pilzen Bambus",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "36",
         "icon": "",
         "name": "Schweinefleisch mit Spargel Champignons",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "37",
         "icon": "",
         "name": "Schweinefleisch mit Sojasprossen",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "38",
         "icon": "",
         "name": "Schweinefleisch mit Bambussprossen scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "39",
         "icon": "",
         "name": "Schweinefleisch mit Paprika  Bambus Morcheln scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "40",
         "icon": "",
         "name": "Schweinefleisch mit Curry Zwiebeln Bambus scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "41",
         "icon": "",
         "name": "Schweinefleisch mit Tofu Erbsen scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "42",
         "icon": "",
         "name": "Schweinefleisch mit Morcheln Paprika Bambus Knoblauch scharf",
-        "price": 1380
+        "price": 1400
       }
     ]
   },
   {
-    "id": 4,
+    "id":4,
     "name": "43-51 Rindfleisch",
     "icon": "",
     "goodsList": [
@@ -400,7 +399,7 @@
     ]
   },
   {
-    "id": 5,
+    "id":5,
     "name": "52-60 Hähnchenﬂeisch",
     "icon": "",
     "goodsList": [
@@ -461,8 +460,8 @@
     ]
   },
   {
-    "id": 6,
-    "name": "61-69 Entenfleisch",
+    "id":6,
+    "name":  "61-69 Entenfleisch",
     "icon": "61-69.jpg",
     "goodsList": [
       {
@@ -480,7 +479,7 @@
       {
         "code": "63",
         "icon": "",
-        "name": "Ente im Topf Bambus Zwiebeln Paprika",
+        "name": "Ente im Topf Bambus Zwiebeln Paprika" ,
         "price": 1700
       },
       {
@@ -522,7 +521,7 @@
     ]
   },
   {
-    "id": 7,
+    "id":7,
     "name": "70-81 Fisch",
     "icon": "",
     "goodsList": [
@@ -587,9 +586,9 @@
         "price": 1550
       }
     ]
-  },
+  } ,
   {
-    "id": 8,
+    "id":8,
     "name": "82-87 Riesengarnelen",
     "icon": "",
     "goodsList": [
@@ -608,8 +607,8 @@
       {
         "code": "84",
         "icon": "",
-        "name": "Garnelen Bambu  Morcheln Paprik",
-        "price": 1950
+        "name":"Garnelen Bambu  Morcheln Paprik",
+        "price":1950
       },
       {
         "code": "85",
@@ -630,9 +629,9 @@
         "price": 1950
       }
     ]
-  },
+  } ,
   {
-    "id": 9,
+    "id":9,
     "name": "88-91 Eierspeisen",
     "icon": "",
     "goodsList": [
@@ -661,9 +660,9 @@
         "price": 1450
       }
     ]
-  },
+  } ,
   {
-    "id": 10,
+    "id":10,
     "name": "92-95 Küche",
     "icon": "",
     "goodsList": [
@@ -694,7 +693,7 @@
     ]
   },
   {
-    "id": 11,
+    "id":11,
     "name": "96-101/125 Reis",
     "icon": "",
     "goodsList": [
@@ -741,9 +740,9 @@
         "price": 1200
       }
     ]
-  },
+  } ,
   {
-    "id": 12,
+    "id":12,
     "name": "102-107/128 Hausgemachte Nudeln",
     "icon": "",
     "goodsList": [
@@ -790,9 +789,9 @@
         "price": 1200
       }
     ]
-  },
+  } ,
   {
-    "id": 13,
+    "id":13,
     "name": "162-168 Normale nudeln",
     "icon": "",
     "goodsList": [
@@ -841,7 +840,7 @@
     ]
   },
   {
-    "id": 14,
+    "id":14,
     "name": "108-123",
     "icon": "",
     "goodsList": [
@@ -938,7 +937,7 @@
     ]
   },
   {
-    "id": 15,
+    "id":15,
     "name": "140-146 Dessert",
     "icon": "",
     "goodsList": [
@@ -985,9 +984,9 @@
         "price": 450
       }
     ]
-  },
+  } ,
   {
-    "id": 16,
+    "id":16,
     "name": "150-156 Extra",
     "icon": "",
     "goodsList": [
@@ -1036,7 +1035,7 @@
     ]
   },
   {
-    "id": 25,
+    "id":25,
     "name": "157-999 Andere",
     "icon": "drink.png",
     "goodsList": [
@@ -1065,34 +1064,10 @@
         "price": 120
       },
       {
-        "code": "171- Cashewnuss",
+        "code": "161- Cashewnuss",
         "icon": "drink.png",
         "name": "Cashewnuss",
         "price": 200
-      },
-      {
-        "code": "172- K.Cashewnuss",
-        "icon": "drink.png",
-        "name": "K.Cashewnuss",
-        "price": 100
-      },
-      {
-        "code": "173- mit Fleisch",
-        "icon": "drink.png",
-        "name": "mit Fleisch",
-        "price": 500
-      },
-      {
-        "code": "174- mit Garnelen",
-        "icon": "drink.png",
-        "name": "mit Garnelen",
-        "price": 600
-      },
-      {
-        "code": "175- Gemüsemischung",
-        "icon": "drink.png",
-        "name": "Gemüsemischung",
-        "price": 250
       },
       {
         "icon": "drink.png",
@@ -1109,7 +1084,7 @@
     ]
   },
   {
-    "id": 26,
+    "id":26,
     "name": "Menüs für 2-6 Personen",
     "icon": "",
     "goodsList": [
@@ -1158,7 +1133,7 @@
     ]
   },
   {
-    "id": 27,
+    "id":27,
     "name": "Eiskarte",
     "icon": "",
     "goodsList": [
@@ -1207,7 +1182,7 @@
     ]
   },
   {
-    "id": 28,
+    "id":28,
     "name": "Für unsere Kleinen Gäste",
     "icon": "",
     "goodsList": [
@@ -1262,7 +1237,7 @@
     ]
   },
   {
-    "id": 17,
+    "id":17,
     "name": "Chinesische trinke",
     "icon": "",
     "goodsList": [
@@ -1279,14 +1254,12 @@
         "price": 320
       },
       {
-        "id":"503",
         "code": "Mei Kwei Lu",
         "icon": "",
         "name": "Mei Kwei Lu",
         "price": 320
       },
       {
-        "id": "504",
         "code": "Mao Tei",
         "icon": "",
         "name": "Mao Tei",
@@ -1295,366 +1268,323 @@
     ]
   },
   {
-    "id": 18,
-    "name": "Aperetif trinke",
-    "icon": "Aperetif_trinke.jpg",
-    "goodsList": [
-      {
-        "icon": "",
-        "id": "506",
-        "code": "FL.Sake",
-        "name": "FL.Sake",
-        "price": 600
-      },
-      {
-        "id": "507",
-        "code": "PfIaumen",
-        "icon": "",
-        "name": "PfIaumenwein",
-        "price": 250
-      },
-      {
-        "id": "515",
-        "code": "Lychee",
-        "icon": "",
-        "name": "Lycheewein",
-        "price": 250
-      },
-      {
-        "code": "MartiniI/Bianco",
-        "icon": "",
-        "name": "MartiniI Rosso/Bianco",
-        "price": 350
-      },
-      {
-        "code": "BaiIeys",
-        "icon": "",
-        "name": "BaiIeys",
-        "price": 350
-      },
-      {
-        "code": "La PaIoma",
-        "icon": "",
-        "name": "La PaIoma",
-        "price": 350
-      }
-    ]
-  },
+  "id":18,
+  "name": "Aperetif trinke",
+  "icon": "Aperetif_trinke.jpg",
+  "goodsList": [
+    {
+      "icon": "",
+      "code": "FL.Sake",
+      "name": "FL.Sake",
+      "price": 600
+    },
+    {
+      "code": "PfIaumen",
+      "icon": "",
+      "name": "PfIaumenwein",
+      "price": 300
+    },
+    {
+      "code": "Lychee",
+      "icon": "",
+      "name": "Lycheewein",
+      "price": 300
+    },
+    {
+      "code": "MartiniI/Bianco",
+      "icon": "",
+      "name": "MartiniI Rosso/Bianco",
+      "price": 350
+    },
+    {
+      "code": "BaiIeys",
+      "icon": "",
+      "name": "BaiIeys",
+      "price": 350
+    },
+    {
+      "code": "La PaIoma",
+      "icon": "",
+      "name": "La PaIoma",
+      "price": 350
+    }
+  ]
+  } ,
   {
-    "id": 19,
+    "id":19,
     "name": "Weine trinke",
     "icon": "Weine_trinke.jpg",
     "goodsList": [
       {
         "icon": "",
-        "id": "521",
         "code": "Rheinhessen",
         "name": "Rheinhessen (IiebIich)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "522",
         "code": "Pinot Grigio",
         "icon": "",
         "name": "Pinot Grigio (trocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "523",
         "code": "Chardonney",
         "icon": "",
         "name": "Chardonney(trocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "524",
         "code": "Burgunder",
         "icon": "",
         "name": "Weiβer Burgunder (trocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "525",
         "code": "KaIIfeIs RiesIing",
         "icon": "",
         "name": "KaIIfeIs RiesIing (haIbtrocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "526",
         "code": "Ros d",
         "icon": "",
         "name": "Ros d,Anjo (trocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "527",
         "code": "Portugiesischer Ros",
         "icon": "",
         "name": "Portugiesischer Ros (IiebIich)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "528",
         "code": "MerIotI Rotwein",
         "icon": "",
         "name": "MerIotI Rotwein (trocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "529",
         "code": "BordeauxI Rotwein",
         "icon": "",
         "name": "BordeauxI Rotwein (trocken)",
-        "price": 550
+        "price": 600
       },
       {
-        "id": "530",
         "code": "WeiβweinschorIe",
         "icon": "",
         "name": "WeiβweinschorIe",
         "price": 500
       }
     ]
-  },
+  } ,
   {
-    "id": 20,
+    "id":20,
     "name": "Bier trinke",
     "icon": "Bier.jpg",
     "goodsList": [
       {
         "icon": "",
-        "id": "562",
         "code": "G.Bier/Alster",
         "name": "G.Bier/Alster",
         "price": 420
       },
       {
-        "id": "561",
         "code": "K.Bier/Alster",
         "icon": "",
         "name": "K.Bier/Alster",
         "price": 350
       },
       {
-        "id": "574",
         "code": "Hefe ,Dunkel",
         "icon": "",
         "name": "Hefe ,Dunkel , Alkoholfrei Weizen",
         "price": 520
       },
       {
-        "id": "571",
         "code": "alkoholfrei",
         "icon": "",
         "name": "Veltins, alkoholfrei",
         "price": 380
       },
       {
-        "id": "575",
         "code": "Vitamalz",
         "icon": "",
         "name": "Vitamalz",
         "price": 320
       },
       {
-        "id": "576",
         "code": "Tsingtao",
         "icon": "",
         "name": "Chinesisches Tsingtao Bier",
         "price": 380
       }
     ]
-  },
+  } ,
   {
-    "id": 21,
+    "id":21,
     "name": "Alkoholfreie/Saftschorle Getränke",
     "icon": "",
     "goodsList": [
       {
         "icon": "",
-        "id": "582",
         "code": "G.Coca/Fruchtschorle",
         "name": "G.Coca / light /Zero /Fanta/ Spezi/ Eistee /Fruchtschorle",
         "price": 420
       },
       {
-        "id": "581",
         "code": "K.Coca/Fruchtschorle",
         "icon": "",
         "name": "K.Coca / light /Zero  /Fanta/ Spezi/ Eistee /Fruchtschorle",
         "price": 250
       },
       {
-        "id": "588",
         "code": "G.Sprite",
         "icon": "",
         "name": "G.Sprite",
-        "price": 420
+        "price": 450
       },
       {
-        "id": "587",
         "code": "K.Sprite",
         "icon": "",
         "name": "K.Sprite",
         "price": 250
       },
       {
-        "id": "594",
         "code": "G.Ginger/Lemon",
         "icon": "",
         "name": "G.Ginger Ale/ Bitter Lemon",
-        "price": 480
+        "price": 450
       },
       {
-        "id": "593",
         "code": "K.Ginger/Lemon",
         "icon": "",
         "name": "K.Ginger Ale/ Bitter Lemon",
         "price": 300
       },
       {
-        "id": "602",
         "code": "G.Vilsa",
         "icon": "",
         "name": "G.Vilsa",
         "price": 380
       },
       {
-        "id": "601",
         "code": "K.Vilsa",
         "icon": "",
         "name": "K.Vilsa",
-        "price": 300
+        "price": 250
       },
       {
-        "id": "603",
         "code": "FL.Wasser",
         "icon": "",
         "name": "FL.Wasser Mineral/Still",
         "price": 690
       }
     ]
-  },
+  } ,
   {
-    "id": 22,
+    "id":22,
     "name": "Säft/Nektare",
     "icon": "Säft_Nektare.jpg",
     "goodsList": [
       {
         "icon": "",
-        "id": "613-S",
         "code": "G. saft-O/A/T/L",
         "name": "G. saft-Orangen/Apfel/Trauben /Lychee",
-        "price": 480
+        "price": 450
       },
       {
-        "id": "612",
         "code": "K. saft-O/A/T/L",
         "icon": "",
         "name": "K. saft-Orangen/Apfel/Trauben /Lychee",
         "price": 300
       },
       {
-        "id": "613-G",
         "code": "G.Guaven/K/J",
         "icon": "",
         "name": "G.Guaven/Kirsch/Schwarzer Johannisbeere",
         "price": 480
       },
       {
-        "id": "614",
         "code": "K.Guaven/KiBa/K/J",
         "icon": "",
         "name": "K.Guaven/ KiBa /Kirsch/Schwarzer Johannisbeere",
         "price": 300
       },
       {
-        "id": "615",
         "code": "G.KiBa",
         "icon": "",
         "name": "G.KiBa",
-        "price": 500
+        "price": 550
       }
     ]
-  },
+  } ,
   {
-    "id": 23,
+    "id":23,
     "name": "Warme Getränke",
     "icon": "Warme_Getränke.jpg",
     "goodsList": [
       {
         "icon": "",
-        "id": "621",
         "code": "Kaffee",
         "name": "Tasse Kaffee",
-        "price": 250
+        "price": 280
       },
       {
-        "id": "622",
         "code": "Kän.. Kaffee",
         "icon": "",
         "name": "Kännchen Kaffee",
         "price": 550
       },
       {
-        "id": "623",
         "code": "Espresso/Cap",
         "icon": "",
         "name": "Espresso oder Cappuccino",
         "price": 300
       },
       {
-        "id": "625",
         "code": "GlasTee",
         "icon": "",
         "name": "Glas Tee (versch.Sorten)",
         "price": 250
       },
       {
-        "id": "626",
         "code": "Jasmin Tee",
         "icon": "",
         "name": "Chinesischer Tee",
-        "price": 450
+        "price": 400
       }
     ]
-  },
+  } ,
   {
-    "id": 24,
+    "id":24,
     "name": "Spirituosen",
     "icon": "",
     "goodsList": [
       {
         "icon": "",
-        "id": "542",
         "code": "Jiger",
         "name": "BommerIunder /Underberg /Asbach uraIt/JubiIiums Aquavit/MaIteser Kreuz/ Jiger  /Fernet Branca  /Rum  /Baccardi /Wodka",
         "price": 300
       },
       {
-        "id": "541",
         "code": "Weizenkorn",
         "icon": "",
         "name": "Weizenkorn",
         "price": 250
       },
       {
-        "id": "551",
         "code": "Johnnie W",
         "icon": "",
         "name": "Johnnie WaIkerr ",
         "price": 450
       },
       {
-        "id": "553",
         "code": "Ramazzotti",
         "icon": "",
         "name": "Ramazzotti",
         "price": 350
       },
       {
-        "id": "554",
         "code": "Whisky Cola",
         "icon": "",
         "name": "Whisky Cola/ Campari Orange",
@@ -1662,4 +1592,5 @@
       }
     ]
   }
+
 ]
