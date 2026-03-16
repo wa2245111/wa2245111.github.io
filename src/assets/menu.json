@@ -279,61 +279,61 @@
         "icon": "",
         "code": "32",
         "name": "Chop Suey mit Schweinefleisch",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "34",
         "icon": "",
         "name": "Gebackenes Schweinefleisch süß saurer soße",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "35",
         "icon": "",
         "name": "Schweinefleisch mit Chin Pilzen Bambus",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "36",
         "icon": "",
         "name": "Schweinefleisch mit Spargel Champignons",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "37",
         "icon": "",
         "name": "Schweinefleisch mit Sojasprossen",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "38",
         "icon": "",
         "name": "Schweinefleisch mit Bambussprossen scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "39",
         "icon": "",
         "name": "Schweinefleisch mit Paprika  Bambus Morcheln scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "40",
         "icon": "",
         "name": "Schweinefleisch mit Curry Zwiebeln Bambus scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "41",
         "icon": "",
         "name": "Schweinefleisch mit Tofu Erbsen scharf",
-        "price": 1380
+        "price": 1400
       },
       {
         "code": "42",
         "icon": "",
         "name": "Schweinefleisch mit Morcheln Paprika Bambus Knoblauch scharf",
-        "price": 1380
+        "price": 1400
       }
     ]
   },
